@@ -1,0 +1,10 @@
+target/*
+.settings/*
+
+.idea/*
+*.iml
+*-logic/*.iml
+*-web/*.iml
+
+.classpath
+.project
