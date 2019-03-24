@@ -6,10 +6,15 @@
 
   <groupId>pers.east.learning</groupId>
   <artifactId>learning-notes</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <version>0.0.1-SNAPSHOT</version>
+    <modules>
+        <module>learning-one</module>
+      <module>learning-basic</module>
+    </modules>
 
-  <name>learning-notes</name>
-  <url>http://www.example.com</url>
+    <name>learning-notes</name>
+    <url>http://www.example.com</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

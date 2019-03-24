@@ -18,6 +18,7 @@ public class IProxyHandler<T> implements InvocationHandler {
         System.out.println("method name:"+method.getName());
         System.out.println("method args:"+args);
         System.out.println("接口方法调用结束");
+        method.invoke(this, args);
         return "执行完毕";
     }
 }
