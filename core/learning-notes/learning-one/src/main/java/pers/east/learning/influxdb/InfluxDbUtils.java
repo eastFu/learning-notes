@@ -159,9 +159,9 @@ public class InfluxDbUtils {
         Thread.currentThread().wait(500000000);*/
 
 
-        batchInsert();
+//        batchInsert();
 
-        batchInsert2();
+//        batchInsert2();
 
         query();
     }
