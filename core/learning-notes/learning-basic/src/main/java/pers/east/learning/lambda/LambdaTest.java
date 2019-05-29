@@ -8,7 +8,22 @@ package pers.east.learning.lambda;
  */
 public class LambdaTest {
 
+    @FunctionalInterface
+    public interface Fighting{
+        boolean figth(String country);
+    }
+
+    public static void go(String country,Fighting fighting){
+        System.out.println(fighting.figth(country)?"yes yes yes ...":"no no no ...");
+    }
+
     public static void main(String[] args) {
+
+        go("America", who -> {
+            return "America".equalsIgnoreCase(who);
+        });
+
+
         new Thread(()-> System.out.println("helo lambda")).start();
     }
 }
