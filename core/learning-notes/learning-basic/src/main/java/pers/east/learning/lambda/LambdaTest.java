@@ -1,5 +1,7 @@
 package pers.east.learning.lambda;
 
+import java.util.function.Supplier;
+
 /**
  * @author East.F
  * @ClassName: LambdaTest
@@ -19,11 +21,11 @@ public class LambdaTest {
 
     public static void main(String[] args) {
 
-        go("America", who -> {
-            return "America".equalsIgnoreCase(who);
-        });
+        go("America", who ->"America".equalsIgnoreCase(who));
 
 
         new Thread(()-> System.out.println("helo lambda")).start();
+
+        Supplier<LambdaTest> lambdaTest = LambdaTest::new;
     }
 }
