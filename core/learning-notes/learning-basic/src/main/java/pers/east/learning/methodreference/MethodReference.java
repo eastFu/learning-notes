@@ -33,7 +33,7 @@ public class MethodReference {
         Apple apple = f4.applay(150L,"red","china");
         System.out.println(apple);
 
-        System.out.println("=======================匿名内部类实现==========================");
+        System.out.println("=======================lambda实现==========================");
 
 
         List<Apple> list = Arrays.asList(new Apple(120L,"red","japan"),new Apple(190L,"red","china"),new Apple(160L,"red","usa"));
