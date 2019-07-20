@@ -40,15 +40,15 @@ public class MethodReference {
         list.sort((a,b) -> a.getColor().compareTo(b.getColor()));
         list.stream().forEach(a-> System.out.println(a));
 
-
-
         System.out.println("==========================方法推导实现=======================");
         /**
          * (Comparator<T> & Serializable) c1, c2) -> keyExtractor.apply(c1).compareTo(keyExtractor.apply(c2))
          */
         List<Apple> list2 = Arrays.asList(new Apple(120L,"red","japan"),new Apple(190L,"red","china"),new Apple(160L,"red","usa"));
         list2.sort(Comparator.comparing(Apple::getColor));
-        list2.stream().forEach(a-> System.out.println(a));
+        list2.stream().forEach( a-> System.out.println(a));
+//        Consumer<Apple> consumer = a-> System.out.println(a);
+//        list2.stream().forEach(consumer);
     }
 
 }
