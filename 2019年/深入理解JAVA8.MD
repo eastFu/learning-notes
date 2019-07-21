@@ -1,18 +1,16 @@
 # 深入理解 JAVA 8
 
 
-### 1. 匿名内部类
+## 1. 匿名内部类
 
-### 2. Lambda
+## 2. Lambda
 
-### 3. method reference 方法推导(方法引用)
-
-
-### 4. stream
-
-测试for、lambda、stream、parallel stream 的效率
+## 3. Method Reference 方法推导(方法引用)
 
 
+## 4. Stream
+
+#### 4.1 测试for、lambda、stream、parallel stream 的效率
 
 
 ```
@@ -186,3 +184,19 @@ public class StreamDemo {
 >3. 结论：
 * 当数据量到达一定量的时候， 使用stream 或者并行的 stream 会快一点，数据量很少的时候 还是for 更快。
 * 并行化：因为并行并一定意味着性能会更好。 应该是缺少一个不字（不一定性能会更好）。stream 在代码上更优雅。
+
+#### 4.2 find
+
+#### 4.3 map
+
+#### 4.4 filter
+
+#### 4.5 reduce
+
+#### 4.6 match
+
+## 5 Optional
+
+Optional 构造有三种 : of(T value) 、 empty() 、  ofNullable(T value)
+
+

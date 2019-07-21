@@ -37,6 +37,5 @@ public class StreamMap {
         //flatmap flat 扁平化, 取出重复字符练习
         String[] words = {"hello","world"};
         Arrays.stream(words).map(w->w.split("")).flatMap(Arrays::stream).distinct().forEach(System.out::print);
-
     }
 }
