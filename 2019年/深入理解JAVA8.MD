@@ -197,6 +197,99 @@ public class StreamDemo {
 
 ## 5 Optional
 
-Optional 构造有三种 : of(T value) 、 empty() 、  ofNullable(T value)
+> Optional 构造有三种 : of(T value) 、 empty() 、  ofNullable(T value)
 
+
+* get()是这些方法中最简单但又最不安全的方法。如果变量存在，它直接返回封装的变量
+值，否则就抛出一个NoSuchElementException异常。所以，除非你非常确定Optional
+变量一定包含值，否则使用这个方法是个相当糟糕的主意。此外，这种方式即便相对于
+嵌套式的null检查，也并未体现出多大的改进。
+* orElse(T other)是我们在代码清单10-5中使用的方法，正如之前提到的，它允许你在
+Optional对象不包含值时提供一个默认值。
+* orElseGet(Supplier<? extends T> other)是orElse方法的延迟调用版，Supplier
+方法只有在Optional对象不含值时才执行调用。如果创建默认值是件耗时费力的工作，
+你应该考虑采用这种方式（借此提升程序的性能），或者你需要非常确定某个方法仅在
+Optional为空时才进行调用，也可以考虑该方式（这种情况有严格的限制条件）。
+* orElseThrow(Supplier<? extends X> exceptionSupplier)和get方法非常类似，
+它们遭遇Optional对象为空时都会抛出一个异常，但是使用orElseThrow你可以定制希
+望抛出的异常类型。
+* ifPresent(Consumer<? super T>)让你能在变量值存在时执行一个作为参数传入的
+方法，否则就不进行任何操作
+
+## 6 Collector
+先上一个案例，Collector 的牛B之处一目了然
+```
+package pers.east.learning.collector;
+
+import pers.east.learning.methodreference.Apple;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+/**
+ * @author East.F
+ * @ClassName: CollectorIntroduce
+ * @Description: TODO
+ * @date 2019/7/21 10:15
+ */
+public class CollectorIntroduce {
+    private static List<Apple> list;
+
+    public static void main(String[] args) {
+        list = Arrays.asList(new Apple(150, "red", "usa")
+                , new Apple(120, "red", "china")
+                , new Apple(160, "pink", "japan")
+                , new Apple(110, "yellow", "korea")
+                , new Apple(170, "green", "russia")
+                , new Apple(100, "green", "england"));
+
+        List<Apple> greenList = list.stream().filter(a -> "green".equals(a.getColor())).collect(Collectors.toList());
+        Optional.ofNullable(greenList).ifPresent(System.out::println);
+
+        System.out.println("==============================");
+        Optional.ofNullable(groupAppleByNormal()).ifPresent(System.out::println);
+
+        System.out.println("==============================");
+        Optional.ofNullable(groupAppleByFunction()).ifPresent(System.out::println);
+
+        System.out.println("==============================");
+        Optional.ofNullable(groupAppleByCollector()).ifPresent(System.out::println);
+    }
+
+    //传统方法的分组实现
+    private static Map<String, List<Apple>> groupAppleByNormal() {
+        Map<String, List<Apple>> groupData = new HashMap<>();
+        for (Apple apple : list) {
+            if (!groupData.keySet().contains(apple.getColor())) {
+                List<Apple> colorList = new ArrayList<>();
+                colorList.add(apple);
+                groupData.put(apple.getColor(), colorList);
+            } else {
+                groupData.get(apple.getColor()).add(apple);
+            }
+        }
+        return groupData;
+    }
+
+    // 函数调用的分组实现
+    private static Map<String, List<Apple>> groupAppleByFunction() {
+        Map<String, List<Apple>> groupData = new HashMap<>();
+        list.stream().forEach(a -> {
+            List<Apple> colorList = Optional.ofNullable(groupData.get(a.getColor())).orElseGet(()->{
+                List<Apple> list = new ArrayList<>();
+                groupData.put(a.getColor(),list);
+                return list;
+            });
+            colorList.add(a);
+        });
+        return groupData;
+    }
+
+    // 使用 java 8 collector 的分组实现
+    private static Map<String, List<Apple>> groupAppleByCollector() {
+        return list.stream().collect(Collectors.groupingBy(Apple::getColor));
+    }
+}
+
+```
 

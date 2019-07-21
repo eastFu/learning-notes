@@ -36,6 +36,7 @@ public class OptionalUsage {
 
         System.out.println(getInsuranceName(null));
 
+        System.out.println("=================");
         System.out.println(getInsuranceNameByOptional(null));
     }
 
@@ -53,4 +54,5 @@ public class OptionalUsage {
         Optional<Insurance> oo = Optional.ofNullable(insurance);
         return oo.map(Insurance::getName).orElse("unknown");
     }
+
 }

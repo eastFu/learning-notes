@@ -34,7 +34,7 @@ public class StreamMap {
 
         System.out.println(model.stream().map(d->d.getName()).collect(Collectors.toList()));
 
-        //flatmap flat 扁平化, 取出重复字符练习
+        //flatmap flat 扁平化, 取出重复字符练习, 方法生成的各个流会被合并或者扁平化为一个单一的流
         String[] words = {"hello","world"};
         Arrays.stream(words).map(w->w.split("")).flatMap(Arrays::stream).distinct().forEach(System.out::print);
     }
