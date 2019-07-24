@@ -1,4 +1,4 @@
-package pers.east.learning.stream;
+package pers.east.learning.java8.stream;
 
 import java.util.Arrays;
 import java.util.List;

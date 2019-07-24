@@ -1,4 +1,4 @@
-package pers.east.learning.stream;
+package pers.east.learning.java8.stream;
 
 import java.util.function.BinaryOperator;
 import java.util.stream.Stream;

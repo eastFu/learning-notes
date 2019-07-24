@@ -1,4 +1,4 @@
-package pers.east.learning.stream.parallel;
+package pers.east.learning.java8.parallel;
 
 import java.util.function.Function;
 import java.util.stream.LongStream;

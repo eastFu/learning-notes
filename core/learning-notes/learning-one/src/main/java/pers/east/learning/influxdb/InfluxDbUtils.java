@@ -28,7 +28,7 @@ public class InfluxDbUtils {
         //result.getResults();
         QueryResult.Result rs = result.getResults().get(0);
         if(rs.getSeries()!=null){
-//            List<List<Object>> valueList = rs.getSeries().stream().map(QueryResult.Series::getValues)
+//            List<List<Object>> valueList = rs.getSeries().pers.east.learning.java8.stream().map(QueryResult.Series::getValues)
 //                    .collect(Collectors.toList()).get(0);
 //            if (valueList != null && valueList.size() > 0) {
 //                for(List<Object> value: valueList){
