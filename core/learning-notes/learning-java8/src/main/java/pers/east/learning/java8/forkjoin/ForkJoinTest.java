@@ -9,8 +9,9 @@ package pers.east.learning.java8.forkjoin;
 public class ForkJoinTest {
     public static void main(String[] args) {
         System.out.println(ForkJoinSumCalculator.forkJoinSum(10_005));
-    }
 
+        System.out.println(ForkJoinSumCalculator2.forkJoinSum2(10_005));
+    }
 
 
 
