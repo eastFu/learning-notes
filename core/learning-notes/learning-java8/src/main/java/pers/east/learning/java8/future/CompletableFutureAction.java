@@ -23,7 +23,7 @@ public class CompletableFutureAction {
         System.out.println("===go====");
         completableFuture.whenComplete((v,t)->{
            Optional.ofNullable(v).ifPresent(System.out::println);
-           Optional.ofNullable(t).ifPresent(System.out::println);
+           Optional.ofNullable(t).ifPresent(x->x.printStackTrace());
         });
 //        Optional.ofNullable(completableFuture.get()).ifPresent(System.out::println);
     }

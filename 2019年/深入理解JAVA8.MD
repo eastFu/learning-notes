@@ -354,4 +354,7 @@ public interface Collector<T, A, R> {
     }
 }
 ```
+# 5.2 Future
 
+## 5.2.1 Completable Future
+![](img/completable-future.png)
