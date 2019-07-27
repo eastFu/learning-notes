@@ -293,7 +293,7 @@ public class CollectorIntroduce {
 
 ```
 
-### 5.1 collector源码分析
+### 6.1 collector源码分析
 ```
 /**
  * T 是接收stream()得到的类型
@@ -354,9 +354,9 @@ public interface Collector<T, A, R> {
     }
 }
 ```
-# 5.2 Future
+# 6.2 Future
 
-## 5.2.1 Completable Future
+## 6.2.1 Completable Future
 
 >核心方法：
 * supplyAsync:
@@ -389,6 +389,15 @@ public interface Collector<T, A, R> {
 
 
 ![](img/completable-future.png)
-# 5.3 New Date API
+# 7. New Date API
 
-## 5.3.1 LocalDate
+## 7.1 LocalDate
+## 7.2 LocalTime
+## 7.3 LocalDateTime
+## 7.4 Instant
+## 7.5 Duration
+## 7.6 Period
+## 7.7 Date Formatter
+## 7.8 Parse Date
+
+# 8. Java8 Functional Programming
