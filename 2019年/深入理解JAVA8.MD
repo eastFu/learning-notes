@@ -358,28 +358,29 @@ public interface Collector<T, A, R> {
 
 ## 5.2.1 Completable Future
 
-	核心方法：
-		* supplyAsync
-		* runAsync
-		* =================
-		* thenApply
-		* thenApplyAsyn
-		* handle
-		* =================
-		* whenComplete
-		* =================
-		* thenRun
-		* thenAccept
-		* =================
-		* thenCompose
-		* thenCombine
-		* thenAcceptBoth
-		* =================
-		* applyToEither
-		* acceptEither
-		* runAfterEither
-		* runAfterBoth
-		* thenCompose
+>核心方法：
+* supplyAsync:
+* runAsync:
+* =================
+* thenApply:
+* thenApplyAsyn:
+* handle:
+* =================
+* whenComplete:
+* =================
+* thenRun:
+* thenAccept:
+* =================
+* thenCompose:
+* thenCombine:
+* thenAcceptBoth:
+* =================
+* applyToEither:其中一个执行完后，接受结果运行，并返回值
+* acceptEither:其中任意一个执行完后，接受结果并处理，但是不返回值
+* runAfterEither:其中任意一个执行完后，不接受结果，不返回值
+* runAfterBoth:两个CompletableFuture都执行结束后运行
+* anyOf:一组CompletableFuture 任意一个执行过后运行
+* allOf:一组CompletableFuture等到全部completableFuture 都执行完毕
 
 
 
@@ -388,3 +389,4 @@ public interface Collector<T, A, R> {
 
 
 ![](img/completable-future.png)
+# 5.3 LocalDate
