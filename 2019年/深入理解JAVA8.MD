@@ -389,4 +389,6 @@ public interface Collector<T, A, R> {
 
 
 ![](img/completable-future.png)
-# 5.3 LocalDate
+# 5.3 New Date API
+
+## 5.3.1 LocalDate
