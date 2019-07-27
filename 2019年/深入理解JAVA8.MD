@@ -357,4 +357,34 @@ public interface Collector<T, A, R> {
 # 5.2 Future
 
 ## 5.2.1 Completable Future
+
+	核心方法：
+		* supplyAsync
+		* runAsync
+		* =================
+		* thenApply
+		* thenApplyAsyn
+		* handle
+		* =================
+		* whenComplete
+		* =================
+		* thenRun
+		* thenAccept
+		* =================
+		* thenCompose
+		* thenCombine
+		* thenAcceptBoth
+		* =================
+		* applyToEither
+		* acceptEither
+		* runAfterEither
+		* runAfterBoth
+		* thenCompose
+
+
+
+
+
+
+
 ![](img/completable-future.png)
