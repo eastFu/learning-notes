@@ -12,6 +12,7 @@
         <module>learning-one</module>
         <module>learning-basic</module>
         <module>learning-java8</module>
+        <module>learning-thread</module>
     </modules>
 
     <name>learning-notes</name>
