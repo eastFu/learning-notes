@@ -6,22 +6,27 @@ import java.util.List;
 
 public class Test {
 
-    private static void getData(ArrayList<String> arrayList , StringBuilder data, ArrayList<String> arrayListData, int length) {
-        for (int i = 0; i < arrayList.size(); i++) {
-            data.append(arrayList.get(i));
-            ArrayList<String> newArrayList = new ArrayList<>(arrayList);
-            newArrayList.remove(i);
-            getData(newArrayList, data, arrayListData, length);
+    static void allSort(int[] array,int begin,int end){
+        if(begin==end){
+            System.out.println(Arrays.toString(array));
+            return;
         }
-        if (arrayList.size() == 0) {
-            arrayListData.add(data.toString());
-        }
-        if (data.length() != 0) {
-            data.deleteCharAt(data.length() - 1);
+        for(int i=begin;i<=end;i++){
+            swap(array,begin,i );
+            allSort(array, begin+1, end);
+            swap(array,begin,i );
         }
     }
 
+    static void swap(int[] array,int a,int b){
+        int tem=array[a];
+        array[a]=array[b];
+        array[b]=tem;
+    }
+
+
     public static void main(String[] args) {
-        List<String> arrayList = Arrays.asList("192.168.1.1","192.168.1.2","192.168.1.3");
+        int[] array={1,2,3};
+        allSort(array, 0, array.length-1);
     }
 }
