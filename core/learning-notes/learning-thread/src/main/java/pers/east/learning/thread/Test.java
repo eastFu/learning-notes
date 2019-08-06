@@ -12,7 +12,7 @@ public class Test {
             return;
         }
         for(int i=begin;i<=end;i++){
-            swap(array,begin,i );
+            swap(array,begin,i);
             allSort(array, begin+1, end);
             swap(array,begin,i );
         }
@@ -23,8 +23,6 @@ public class Test {
         array[a]=array[b];
         array[b]=tem;
     }
-
-
     public static void main(String[] args) {
         int[] array={1,2,3};
         allSort(array, 0, array.length-1);
