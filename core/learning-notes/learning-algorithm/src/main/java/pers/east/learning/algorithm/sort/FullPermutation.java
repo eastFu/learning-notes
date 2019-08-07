@@ -1,12 +1,10 @@
-package pers.east.learning.thread;
+package pers.east.learning.algorithm.sort;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-public class Test {
-
+public class FullPermutation {
     static void allSort(int[] array,int begin,int end){
+//        Arrays.stream(array).forEach(x -> System.out.print(x));
         if(begin==end){
             System.out.println(Arrays.toString(array));
             return;
@@ -14,7 +12,7 @@ public class Test {
         for(int i=begin;i<=end;i++){
             swap(array,begin,i);
             allSort(array, begin+1, end);
-            swap(array,begin,i );
+            swap(array,begin,i);
         }
     }
 

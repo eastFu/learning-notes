@@ -13,6 +13,7 @@
         <module>learning-basic</module>
         <module>learning-java8</module>
         <module>learning-thread</module>
+        <module>learning-algorithm</module>
     </modules>
 
     <name>learning-notes</name>
