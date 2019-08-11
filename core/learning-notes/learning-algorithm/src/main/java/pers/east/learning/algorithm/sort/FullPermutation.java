@@ -5,12 +5,13 @@ import java.util.Arrays;
 public class FullPermutation {
 
     static void allSort(int[] array,int begin,int end){
+        
 //        Arrays.stream(array).forEach(x -> System.out.print(x));
         if(begin==end){
             System.out.println(Arrays.toString(array));
             return;
         }
-        
+
         for(int i=begin;i<=end;i++){
             swap(array,begin,i);
             allSort(array, begin+1, end);
