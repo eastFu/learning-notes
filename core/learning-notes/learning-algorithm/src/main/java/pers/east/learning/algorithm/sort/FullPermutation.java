@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class FullPermutation {
 
     static void allSort(int[] array,int begin,int end){
-        
+
 //        Arrays.stream(array).forEach(x -> System.out.print(x));
         if(begin==end){
             System.out.println(Arrays.toString(array));
@@ -18,7 +18,6 @@ public class FullPermutation {
             swap(array,begin,i);
         }
     }
-
     static void swap(int[] array,int a,int b){
         int tem=array[a];
         array[a]=array[b];
