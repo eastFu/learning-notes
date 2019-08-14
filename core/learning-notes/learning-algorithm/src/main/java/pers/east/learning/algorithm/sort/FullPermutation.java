@@ -2,6 +2,9 @@ package pers.east.learning.algorithm.sort;
 
 import java.util.Arrays;
 
+/**
+ * @author Administrator
+ */
 public class FullPermutation {
     static void allSort(int[] array,int begin,int end){
         Arrays.stream(array).forEach(x -> System.out.print(x));
