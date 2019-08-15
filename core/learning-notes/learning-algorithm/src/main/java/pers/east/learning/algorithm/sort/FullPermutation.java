@@ -12,7 +12,6 @@ public class FullPermutation {
             System.out.println(Arrays.toString(array));
             return;
         }
-
         for(int i=begin;i<=end;i++){
             swap(array,begin,i);
             allSort(array, begin+1, end);
