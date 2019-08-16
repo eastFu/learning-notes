@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 /**
  * @author Administrator
+ * 排列组合
  */
 public class FullPermutation {
     static void allSort(int[] array,int begin,int end){
