@@ -3,50 +3,57 @@ package pers.east.learning.algorithm.sort;
 import com.alibaba.fastjson.JSON;
 
 /**
- * 冒泡排序
+ *
+ * 冒泡排序 ： 实现访方式很多，基本都一样，
+ * 1. 需要两层循环来控制
+ * 2. 第一层循环负责控制循环范围
+ * 3. 第二层循环负责进行相邻元素的比较
+ * 4. 比较之后交换位置
+ *
+ * @author eastFu
  */
 public class BubbleSort {
 
-    static int [] arr = {5,6,1,3,2,7,9,8};
-
-    public static void bubble(int[] array){
-        System.out.println("sort before:"+JSON.toJSONString(array));
-        int index =0;
-        for(int i = 0;i< array.length;i++){
-            for(int j = i+1;j<array.length;j++){
+    public static void bubble(int[] array) {
+        System.out.println("sort before : " + JSON.toJSONString(array));
+        int index = 0;
+        for (int i = array.length - 1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
                 //交换位置
-                if(array[i]>array[j]){
-                    int tmp = array[i];
-                    array[i]=array[j];
-                    array[j]=tmp;
+                if (array[j] > array[j + 1]) {
+                    swap(array, j, j + 1);
+                    index++;
                 }
-                index++;
             }
-            System.out.println("sort "+i+":"+JSON.toJSONString(array));
+            System.out.println("sort" + i + " : " + JSON.toJSONString(array));
         }
-        System.out.println("index:"+index);
+        System.out.println("swap count : " + index);
     }
 
-    public static void bubble2(int[] array){
-        System.out.println("sort2 before:"+JSON.toJSONString(array));
-        int index2 =0;
-        for(int x = 0;x< array.length;x++){
-            for(int y = 0;y<array.length-x-1;y++){
-                //交换位置
-                if(array[y]>array[y+1]){
-                    int tmp = array[y];
-                    array[y]=array[y+1];
-                    array[y+1]=tmp;
+    public static void bubble2(int[] array) {
+        System.out.println("sort2 before:" + JSON.toJSONString(array));
+        int index2 = 0;
+        for (int i = 0; i < array.length - 1; i++) {
+            for (int j = i + 1; j < array.length; j++) {
+                if (array[i] < array[j]) {
+                    swap(array, i, j);
+                    index2++;
                 }
-                index2++;
             }
-            System.out.println("sort2 "+x+":"+JSON.toJSONString(array));
+            System.out.println("sort2 " + i + " : " + JSON.toJSONString(array));
         }
-        System.out.println("index2:"+index2);
+        System.out.println("swap count : " + index2);
+    }
+
+    public static void swap(int[] ar, int aIndex, int bIndex) {
+        int temp = ar[aIndex];
+        ar[aIndex] = ar[bIndex];
+        ar[bIndex] = temp;
     }
 
     public static void main(String[] args) {
-//        bubble(arr);
-        bubble2(arr);
+        int[] arr = {5, 6, 1, 3, 2, 7, 9, 8};
+        bubble(arr);
+//        bubble2(arr);
     }
 }
