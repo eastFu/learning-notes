@@ -24,7 +24,7 @@ public class FullPermutation {
         array[a]=array[b];
         array[b]=tem;
     }
-    
+
     public static void main(String[] args) {
         int[] array={1,2,3};
         allSort(array, 0, array.length-1);
