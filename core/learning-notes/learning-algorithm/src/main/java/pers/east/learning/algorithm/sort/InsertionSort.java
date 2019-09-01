@@ -3,7 +3,7 @@ package pers.east.learning.algorithm.sort;
 import com.alibaba.fastjson.JSON;
 
 /**
- * 插入排序： 双层循环，每次找出最大的一个放入每次循环的起始位置
+ * 插入排序： 双层循环，每次与前面的排好序的元素比较，如果遇到自己比其中一个大，停止，说明这次这次循环已经排好序了
  * @author eastFu
  */
 public class InsertionSort {
