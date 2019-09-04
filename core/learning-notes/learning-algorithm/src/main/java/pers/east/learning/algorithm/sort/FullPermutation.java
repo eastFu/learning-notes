@@ -3,8 +3,8 @@ package pers.east.learning.algorithm.sort;
 import java.util.Arrays;
 
 /**
- * @author Administrator
- * 排列组合
+ * 全排列
+ * @author eastFu
  */
 public class FullPermutation {
     static void allSort(int[] array,int begin,int end){
