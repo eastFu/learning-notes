@@ -22,7 +22,7 @@ public class PostInfix {
      */
     public String doTransfer(String str){
 
-        
+
         return null;
     }
 }
