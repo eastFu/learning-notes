@@ -5,8 +5,6 @@ package pers.east.learning.algorithm.stack;
  * @author eastFu
  */
 public class PostInfix {
-
-
     /**
      * 把中缀表达式转化为后缀表达式
      *
@@ -20,9 +18,72 @@ public class PostInfix {
      * @param str 要转换的中缀表达式
      * @return 转换成的后缀表达式
      */
-    public String doTransfer(String str){
+    public static String doTransfer(String str){
+        StringBuffer buffer = new StringBuffer();
+        MyStack myStack = new MyStack(20);
+        char[] cs = str.toCharArray();
 
+        for (int i = 0; i< cs.length;i++){
+            char c = cs[i];
+            if(c=='+'||c=='-'){
+                doOperation(c,buffer,1,myStack);
+            }else if (c=='*'||c=='/'){
+                doOperation(c,buffer,2,myStack);
+            }
 
-        return null;
+            else if (c=='('){
+                myStack.push(c);
+            }else if (c==')'){
+                doRightBracket(myStack,buffer);
+            } else {
+                buffer.append(c);
+            }
+        }
+
+        while (!myStack.isEmpty()){
+            buffer.append((char)myStack.pop());
+        }
+        return buffer.toString();
+    }
+
+    private static void doOperation(char c,StringBuffer buf,int level,MyStack myStack){
+        while (!myStack.isEmpty()){
+            char top = (char) myStack.pop();
+            if(top=='('){
+                myStack.push(top);
+                break;
+            }else {
+                int topLevel = 0;
+                if(top=='+'||top=='-'){
+                    topLevel=1;
+                } else {
+                    topLevel=2;
+                }
+
+                if (topLevel >= level) {
+                    buf.append(top);
+                } else {
+                    myStack.push(top);
+                    break;
+                }
+            }
+        }
+        myStack.push(c);
+    }
+
+    private static void doRightBracket(MyStack myStack,StringBuffer buffer){
+        while (!myStack.isEmpty()){
+            char top = (char) myStack.pop();
+            if(top == '('){
+                break;
+            }else {
+                buffer.append(top);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println("before:"+"(3+2)/5-((7+8)*4-5)");
+        System.out.println("after:"+doTransfer("(3+2)/5-((7+8)*4-5)"));
     }
 }
