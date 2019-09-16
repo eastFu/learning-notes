@@ -69,6 +69,13 @@ public class SingleLinkList {
         single.insertFirst(3);
         single.insertFirst(1);
 
+        single.removeFirst();
+        single.displayList();
+
+        single.remove(4);
+        single.displayList();
+
+        single.insertFirst(4);
         single.displayList();
     }
 }
