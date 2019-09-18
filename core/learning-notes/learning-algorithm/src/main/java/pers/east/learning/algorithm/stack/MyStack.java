@@ -61,4 +61,5 @@ public class MyStack {
         System.out.println(myStack.peek());
         System.out.println(myStack.isEmpty());
     }
+
 }
