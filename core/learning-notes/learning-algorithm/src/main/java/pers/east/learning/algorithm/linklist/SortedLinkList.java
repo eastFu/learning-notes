@@ -1,17 +1,27 @@
 package pers.east.learning.algorithm.linklist;
 
 /**
- * 链表练习： 单链表的基本操作
+ * 链表练习： 有序链表的实现
  * @author Administrator
  */
-public class SingleLinkList {
+public class SortedLinkList {
 
     private LinkNode firstNode;
 
     public void insertFirst(int id){
         LinkNode newLink = new LinkNode(id);
-        newLink.setNext(firstNode);
-        firstNode=newLink;
+        LinkNode previous = null;
+        LinkNode current = firstNode;
+        while(current!=null&&id>current.getId()){
+            previous = current;
+            current = current.getNext();
+        }
+        if(previous==null){
+            firstNode = newLink;
+        }else {
+            previous.setNext(newLink);
+        }
+        newLink.setNext(current);
     }
 
     public LinkNode removeFirst(){
@@ -71,7 +81,7 @@ public class SingleLinkList {
     }
 
     public static void main(String[] args) {
-        SingleLinkList single = new SingleLinkList();
+        SortedLinkList single = new SortedLinkList();
         single.insertFirst(2);
         single.insertFirst(4);
         single.insertFirst(3);
