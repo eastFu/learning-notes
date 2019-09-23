@@ -26,6 +26,14 @@ public class FirstLastList {
         lastNode=newLink;
     }
 
+    public boolean isEmpty(){
+        return firstNode==null&&lastNode==null;
+    }
+
+    public LinkNode peekFirst(){
+        return firstNode;
+    }
+
     public LinkNode removeFirst(){
         LinkNode temp = firstNode;
         firstNode = temp.getNext();
