@@ -86,7 +86,7 @@ public class SortedLinkList {
         single.insertFirst(4);
         single.insertFirst(3);
         single.insertFirst(1);
-
+        single.displayList();
         single.removeFirst();
         single.displayList();
 

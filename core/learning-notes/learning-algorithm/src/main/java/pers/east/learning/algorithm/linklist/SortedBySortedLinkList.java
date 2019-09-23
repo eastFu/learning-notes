@@ -17,6 +17,7 @@ public class SortedBySortedLinkList {
         int index =0;
         while (!sortedLinkList.isEmpty()){
             ret[index] = sortedLinkList.removeFirst().getId();
+            index++;
         }
         return ret;
     }
