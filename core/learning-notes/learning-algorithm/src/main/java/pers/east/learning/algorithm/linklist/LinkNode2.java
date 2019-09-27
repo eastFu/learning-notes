@@ -40,6 +40,6 @@ public class LinkNode2 {
     }
 
     public void print(){
-        System.out.println("link node--->: "+ JSON.toJSONString(this));
+        System.out.println("link node--->: id="+id+",pre:"+(previous!=null?previous.getId():"")+",next:"+(next!=null?next.getId():""));
     }
 }
