@@ -19,11 +19,20 @@ public class Towers {
         } else {
             transfer(topN-1,src,desc,temp);
             System.out.println("将"+topN+"从"+src+"移动到"+desc);
-            transfer(topN-1,temp,src,temp);
+            transfer(topN-1,temp,src,desc);
         }
     }
 
     public static void main(String[] args) {
-        
+        /**
+         *      1
+         *      2
+         *      3
+         *
+         *      A  →→→→→ B →→→→→ C
+         *
+         *      将 1.2.3.4.5 从A移动到C
+      */
+        transfer(3,"A","B","C");
     }
 }

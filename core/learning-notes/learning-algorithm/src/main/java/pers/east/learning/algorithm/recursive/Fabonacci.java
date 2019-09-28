@@ -17,7 +17,7 @@ public class Fabonacci {
     public static int[] getFabonacci(int num) {
         int[]arrays = new int[num];
         for(int i=0;i<num;i++){
-            arrays[i]=getNum(i);
+            arrays[i]=getNum(i+1);
         }
         return arrays;
     }
@@ -50,7 +50,7 @@ public class Fabonacci {
     }
 
     public static void main(String[] args) {
-//        Arrays.asList(getFabonacci(10)).forEach(System.out::println);
+        Arrays.stream(getFabonacci(10)).forEach(System.out::println);
         System.out.println(getNum(6));
         System.out.println(sum(5));
     }
