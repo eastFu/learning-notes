@@ -11,6 +11,6 @@ public class MergeSort {
     private void merge(){}
 
     public static void main(String[] args) {
-        
+
     }
 }
