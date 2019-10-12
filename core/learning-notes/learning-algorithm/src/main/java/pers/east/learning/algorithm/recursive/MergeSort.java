@@ -6,4 +6,11 @@ package pers.east.learning.algorithm.recursive;
  */
 public class MergeSort {
 
+    private void sort(){}
+
+    private void merge(){}
+
+    public static void main(String[] args) {
+        
+    }
 }
