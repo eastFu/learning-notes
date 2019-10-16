@@ -21,7 +21,6 @@ public class Fabonacci {
         }
         return arrays;
     }
-
     /**
      * 求第num个元素的值
      * @param num
