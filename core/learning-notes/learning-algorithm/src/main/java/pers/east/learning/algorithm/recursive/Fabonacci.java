@@ -1,5 +1,7 @@
 package pers.east.learning.algorithm.recursive;
 
+
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
 /**
@@ -48,10 +50,11 @@ public class Fabonacci {
         return getNum(num)+sum(num-1);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnsupportedEncodingException {
         Arrays.stream(getFabonacci(10)).forEach(System.out::println);
         System.out.println(getNum(6));
         System.out.println(sum(5));
+
     }
 
 }
