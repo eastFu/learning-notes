@@ -1,128 +1,235 @@
 package pers.east.learning.algorithm.encryption;
 
 import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.IvParameterSpec;
 import java.nio.charset.Charset;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 
 /**
  * des 加密算法
  */
 public class Des {
     /**
-     * 对给定的字符串以指定的编码方式和密钥进行加密
-     * @param srcStr 待加密的字符串
-     * @param charset 字符集，如utf8
-     * @param sKey 密钥
+     *
+     * @return DES算法密钥
      */
-    public static String encrypt(String srcStr, Charset charset, String sKey) {
-        byte[] src = srcStr.getBytes(charset);
-        byte[] buf = Des.encrypt(src, sKey);
-        return Des.parseByte2HexStr(buf);
-    }
-
-    /**
-     * 对给定的密文以指定的编码方式和密钥进行解密
-     * @param hexStr 需要解密的密文
-     * @param charset 字符集
-     * @param sKey 密钥
-     * @return 解密后的原文
-     * @throws Exception
-     */
-    public static String decrypt(String hexStr, Charset charset, String sKey) throws Exception {
-        byte[] src = Des.parseHexStr2Byte(hexStr);
-        byte[] buf = Des.decrypt(src, sKey);
-        return new String(buf, charset);
-    }
-
-    public static byte[] encrypt(byte[] data, String sKey) {
+    public static byte[] generateKey() {
         try {
-            byte[] key = sKey.getBytes();
 
-            IvParameterSpec iv = new IvParameterSpec(key);
-            DESKeySpec desKey = new DESKeySpec(key);
+            // DES算法要求有一个可信任的随机数源
+            SecureRandom sr = new SecureRandom();
 
-            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
-            SecretKey securekey = keyFactory.generateSecret(desKey);
+            // 生成一个DES算法的KeyGenerator对象
+            KeyGenerator kg = KeyGenerator.getInstance("DES");
+            kg.init(sr);
 
-            Cipher cipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
+            // 生成密钥
+            SecretKey secretKey = kg.generateKey();
 
-            cipher.init(Cipher.ENCRYPT_MODE, securekey, iv);
+            // 获取密钥数据
+            byte[] key = secretKey.getEncoded();
 
-            return cipher.doFinal(data);
-        } catch (Throwable e) {
+            return key;
+        } catch (NoSuchAlgorithmException e) {
+            System.err.println("DES算法，生成密钥出错!");
             e.printStackTrace();
         }
+
         return null;
     }
 
     /**
-     * 解密
-     * @param src
-     * @param sKey
-     * @return
-     * @throws Exception
+     * 加密函数
+     *
+     * @param data
+     *            加密数据
+     * @param key
+     *            密钥
+     * @return 返回加密后的数据
      */
-    public static byte[] decrypt(byte[] src, String sKey) throws Exception {
-        byte[] key = sKey.getBytes();
-        // 初始化向量
-        IvParameterSpec iv = new IvParameterSpec(key);
-        // 创建一个DESKeySpec对象
-        DESKeySpec desKey = new DESKeySpec(key);
-        // 创建一个密匙工厂
-        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
-        // 将DESKeySpec对象转换成SecretKey对象
-        SecretKey securekey = keyFactory.generateSecret(desKey);
-        // Cipher对象实际完成解密操作
-        Cipher cipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
-        // 用密匙初始化Cipher对象
-        cipher.init(Cipher.DECRYPT_MODE, securekey, iv);
-        // 真正开始解密操作
-        return cipher.doFinal(src);
+    public static byte[] encrypt(byte[] data, byte[] key) {
+
+        try {
+
+            // DES算法要求有一个可信任的随机数源
+            SecureRandom sr = new SecureRandom();
+
+            // 从原始密钥数据创建DESKeySpec对象
+            DESKeySpec dks = new DESKeySpec(key);
+
+            // 创建一个密匙工厂，然后用它把DESKeySpec转换成
+            // 一个SecretKey对象
+            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
+            SecretKey secretKey = keyFactory.generateSecret(dks);
+
+            // using DES in ECB mode
+            Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
+
+            // 用密匙初始化Cipher对象
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey, sr);
+
+            // 执行加密操作
+            byte encryptedData[] = cipher.doFinal(data);
+
+            return encryptedData;
+        } catch (Exception e) {
+            System.err.println("DES算法，加密数据出错!");
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     /**
-     * 将二进制转换成16进制
+     * 解密函数
      *
-     * @param buf
-     * @return
+     * @param data
+     *            解密数据
+     * @param key
+     *            密钥
+     * @return 返回解密后的数据
      */
-    public static String parseByte2HexStr(byte buf[]) {
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < buf.length; i++) {
-            String hex = Integer.toHexString(buf[i] & 0xFF);
-            if (hex.length() == 1) {
-                hex = '0' + hex;
-            }
-            sb.append(hex.toUpperCase());
+    public static byte[] decrypt(byte[] data, byte[] key) {
+        try {
+            // DES算法要求有一个可信任的随机数源
+            SecureRandom sr = new SecureRandom();
+
+            // byte rawKeyData[] = /* 用某种方法获取原始密匙数据 */;
+
+            // 从原始密匙数据创建一个DESKeySpec对象
+            DESKeySpec dks = new DESKeySpec(key);
+
+            // 创建一个密匙工厂，然后用它把DESKeySpec对象转换成
+            // 一个SecretKey对象
+            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
+            SecretKey secretKey = keyFactory.generateSecret(dks);
+
+            // using DES in ECB mode
+            Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
+
+            // 用密匙初始化Cipher对象
+            cipher.init(Cipher.DECRYPT_MODE, secretKey, sr);
+
+            // 正式执行解密操作
+            byte decryptedData[] = cipher.doFinal(data);
+
+            return decryptedData;
+        } catch (Exception e) {
+            System.err.println("DES算法，解密出错。");
+            e.printStackTrace();
         }
-        return sb.toString();
+
+        return null;
     }
 
     /**
-     * 将16进制转换为二进制
+     * 加密函数
      *
-     * @param hexStr
-     * @return
+     * @param data
+     *            加密数据
+     * @param key
+     *            密钥
+     * @return 返回加密后的数据
      */
-    public static byte[] parseHexStr2Byte(String hexStr) {
-        if (hexStr.length() < 1) return null;
-        byte[] result = new byte[hexStr.length() / 2];
-        for (int i = 0; i < hexStr.length() / 2; i++) {
-            int high = Integer.parseInt(hexStr.substring(i * 2, i * 2 + 1), 16);
-            int low = Integer.parseInt(hexStr.substring(i * 2 + 1, i * 2 + 2), 16);
-            result[i] = (byte) (high * 16 + low);
+    public static byte[] CBCEncrypt(byte[] data, byte[] key, byte[] iv) {
+
+        try {
+            // 从原始密钥数据创建DESKeySpec对象
+            DESKeySpec dks = new DESKeySpec(key);
+
+            // 创建一个密匙工厂，然后用它把DESKeySpec转换成
+            // 一个SecretKey对象
+            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
+            SecretKey secretKey = keyFactory.generateSecret(dks);
+
+            // Cipher对象实际完成加密操作
+            Cipher cipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
+            // 若采用NoPadding模式，data长度必须是8的倍数
+            // Cipher cipher = Cipher.getInstance("DES/CBC/NoPadding");
+
+            // 用密匙初始化Cipher对象
+            IvParameterSpec param = new IvParameterSpec(iv);
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey, param);
+
+            // 执行加密操作
+            byte encryptedData[] = cipher.doFinal(data);
+
+            return encryptedData;
+        } catch (Exception e) {
+            System.err.println("DES算法，加密数据出错!");
+            e.printStackTrace();
         }
-        return result;
+
+        return null;
     }
 
-    public static void main(String[] args) throws Exception{
-        String str = "";
-        String encode = Des.encrypt(str, Charset.forName("utf8"), "testtest");
+    /**
+     * 解密函数
+     *
+     * @param data
+     *            解密数据
+     * @param key
+     *            密钥
+     * @return 返回解密后的数据
+     */
+    public static byte[] CBCDecrypt(byte[] data, byte[] key, byte[] iv) {
+        try {
+            // 从原始密匙数据创建一个DESKeySpec对象
+            DESKeySpec dks = new DESKeySpec(key);
+
+            // 创建一个密匙工厂，然后用它把DESKeySpec对象转换成
+            // 一个SecretKey对象
+            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
+            SecretKey secretKey = keyFactory.generateSecret(dks);
+
+            // using DES in CBC mode
+            Cipher cipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
+            // 若采用NoPadding模式，data长度必须是8的倍数
+            // Cipher cipher = Cipher.getInstance("DES/CBC/NoPadding");
+
+            // 用密匙初始化Cipher对象
+            IvParameterSpec param = new IvParameterSpec(iv);
+            cipher.init(Cipher.DECRYPT_MODE, secretKey, param);
+
+            // 正式执行解密操作
+            byte decryptedData[] = cipher.doFinal(data);
+
+            return decryptedData;
+        } catch (Exception e) {
+            System.err.println("DES算法，解密出错。");
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public static void main(String[] args) {
+        try {
+            byte[] key = "7516900".getBytes();
+            byte[] iv = "7516900".getBytes();
+            byte[] data = Des.encrypt("E10ADC3949BA59ABBE56E057F20F883E".getBytes(), key);
+            System.out.println(new String(data));
+            System.out.print("EBC mode:");
+            System.out.println(new String(Des.decrypt(data, key)));
+            System.out.print("CBC mode:");
+            data = Des.CBCEncrypt("E10ADC3949BA59ABBE56E057F20F883E".getBytes(), key, iv);
+            System.out.println(new String(Des.CBCDecrypt("DC6E0B563E891DC4BD17568D91A134EBF551B34D812A1361C8461EA96703076B".getBytes(), key, iv)).length());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+   /* public static void main(String[] args) throws Exception{
+        String str = "E10ADC3949BA59ABBE56E057F20F883E";
+        String encode = Des.encrypt(str, Charset.forName("utf8"), "12345678");
         System.out.println(encode);
-        String decode = Des.encrypt(encode, Charset.forName("utf8"), "testtest");
+        String decode = Des.encrypt(encode, Charset.forName("utf8"), "12345678");
         System.out.println(decode);
-    }
+    }*/
 }
