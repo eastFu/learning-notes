@@ -210,15 +210,15 @@ public class Des {
 
     public static void main(String[] args) {
         try {
-            byte[] key = "7516900".getBytes();
-            byte[] iv = "7516900".getBytes();
+            byte[] key = "75169000".getBytes();
+            byte[] iv = "75169000".getBytes();
             byte[] data = Des.encrypt("E10ADC3949BA59ABBE56E057F20F883E".getBytes(), key);
             System.out.println(new String(data));
             System.out.print("EBC mode:");
             System.out.println(new String(Des.decrypt(data, key)));
             System.out.print("CBC mode:");
             data = Des.CBCEncrypt("E10ADC3949BA59ABBE56E057F20F883E".getBytes(), key, iv);
-            System.out.println(new String(Des.CBCDecrypt("DC6E0B563E891DC4BD17568D91A134EBF551B34D812A1361C8461EA96703076B".getBytes(), key, iv)).length());
+            System.out.println(new String(Des.CBCDecrypt(data, key, iv)));
 
         } catch (Exception e) {
             e.printStackTrace();
