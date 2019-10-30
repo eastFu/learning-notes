@@ -1,147 +1,143 @@
 package pers.east.learning.algorithm.encryption;
 
 import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 
 public class Des2 {
-    /*
-     * 加密用的Key 可以用26个字母和数字组成 此处使用AES-128-CBC加密模式，key需要为16位。
-     */
-    private static String sKey = "12345678";
-    private static String ivParameter = "12345678";
-
-
-    // 加密
-    public static String encrypt(String sSrc) throws Exception {
-        Cipher cipher = Cipher.getInstance("DESede/CBC/PKCS5Padding");
-//        byte[] raw = sKey.getBytes();
-        byte[] raw = hex(sKey);
-        SecretKeySpec skeySpec = new SecretKeySpec(raw, "DESede");
-        IvParameterSpec iv = new IvParameterSpec(ivParameter.getBytes());// 使用CBC模式，需要一个向量iv，可增加加密算法的强度
-        cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
-        byte[] encrypted = cipher.doFinal(sSrc.getBytes());
-        return getHexString(encrypted);
-    }
-
-    public static byte[] hex(String keyStr) throws UnsupportedEncodingException {
-        byte[] key = new byte[24];    //声明一个24位的字节数组，默认里面都是0
-        byte[] temp = keyStr.getBytes("UTF-8");    //将字符串转成字节数组
-        /*
-         * 执行数组拷贝
-         * System.arraycopy(源数组，从源数组哪里开始拷贝，目标数组，拷贝多少位)
-         */
-        if(key.length > temp.length){
-            //如果temp不够24位，则拷贝temp数组整个长度的内容到key数组中
-            System.arraycopy(temp, 0, key, 0, temp.length);
-        }else{
-            //如果temp大于24位，则拷贝temp数组24个长度的内容到key数组中
-            System.arraycopy(temp, 0, key, 0, key.length);
-        }
-        return key;
-    }
-
-
-    /*
-     * 转换为16进制数
+    /**
+     * 加密
      * @param data
-     * @return
-     *        16进制数
-     */
-    public static String getHexString(byte[] data) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < data.length; ++i) {
-            String ch = Integer.toHexString(data[i] & 0xFF).toUpperCase();
-            if (ch.length() == 2)
-                sb.append(ch);
-            else
-                sb.append("0").append(ch);
-        }
-        return sb.toString();
-    }
-
-    /**
-     * 将16进制的字符串转换为byte数组
-     * @param hexString
+     * @param sKey
      * @return
      */
-    public static byte[] hexStringToBytes(String hexString) {
-        if (hexString == null || hexString.equals("")) {
-            return null;
-        }
-        hexString = hexString.toUpperCase();
-        int length = hexString.length() / 2;
-        char[] hexChars = hexString.toCharArray();
-        byte[] d = new byte[length];
-        for (int i = 0; i < length; i++) {
-            int pos = i * 2;
-            d[i] = (byte) (charToByte(hexChars[pos]) << 4 | charToByte(hexChars[pos + 1]));
-        }
-        return d;
-    }
-
-    public static byte charToByte(char c) {
-        return (byte) "0123456789ABCDEF".indexOf(c);
-    }
-    /**
-     * byte数组转hex
-     * @param bytes
-     * @return
-     */
-    public static String byteToHex(byte[] bytes){
-        StringBuffer sb = new StringBuffer(bytes.length);
-        String sTemp;
-        for (int i = 0; i < bytes.length; i++) {
-            sTemp = Integer.toHexString(0xFF & bytes[i]);
-            if (sTemp.length() < 2)
-                sb.append(0);
-            sb.append(sTemp.toUpperCase());
-        }
-        return sb.toString();
-    }
-
-    // 解密
-    public static String decrypt(String sSrc) throws Exception {
+    public static byte[] encrypt(byte[] data, String sKey) {
         try {
-            byte[] raw = hex(sKey);
-            SecretKeySpec skeySpec = new SecretKeySpec(raw, "DESede");
-            Cipher cipher = Cipher.getInstance("DESede/CBC/PKCS5Padding");
-            IvParameterSpec iv = new IvParameterSpec(ivParameter.getBytes());
-            cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);
-//            byte[] encrypted1 = new BASE64Decoder().decodeBuffer(sSrc);// 先用base64解密
-            byte[] encrypted1 = hexStringToBytes(sSrc);
-            byte[] original = cipher.doFinal(encrypted1);
-            String originalString = new String(original, "utf-8");
-            return originalString;
-        } catch (Exception ex) {
-            return null;
+            byte[] key = sKey.getBytes();
+            // 初始化向量
+            IvParameterSpec iv = new IvParameterSpec(key);
+            DESKeySpec desKey = new DESKeySpec(key);
+            // 创建一个密匙工厂，然后用它把DESKeySpec转换成securekey
+            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
+            SecretKey securekey = keyFactory.generateSecret(desKey);
+            // Cipher对象实际完成加密操作
+            Cipher cipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
+            // 用密匙初始化Cipher对象
+            cipher.init(Cipher.ENCRYPT_MODE, securekey, iv);
+            // 现在，获取数据并加密
+            // 正式执行加密操作
+            return cipher.doFinal(data);
+        } catch (Throwable e) {
+            e.printStackTrace();
         }
-    }
-    public static void main(String[] args) throws Exception {
-        // 加密
-        String cSrc1 ="E10ADC3949BA59ABBE56E057F20F883E";
-        long lStart = System.currentTimeMillis();
-        System.out.println(trimStr(cSrc1));
-        String enString = Des2.encrypt(trimStr(cSrc1));
-        System.out.println("加密后的字串是：" + enString);
-//        String urlString = URLEncoder.encode(enString);
-//        System.out.println("加密编码后的字串是：" + urlString);
-//        long lUseTime = System.currentTimeMillis() - lStart;
-//        System.out.println("加密耗时：" + lUseTime + "毫秒");
-//        // 解密
-//        lStart = System.currentTimeMillis();
-//        String deString = Des3Util.decrypt(enString);
-//        System.out.println("解密后的字串是：" + deString);
-//        lUseTime = System.currentTimeMillis() - lStart;
-//        System.out.println("解密耗时：" + lUseTime + "毫秒");
+        return null;
     }
 
-    public static String trimStr(String xml){
-        StringBuffer sb= new StringBuffer();
-        for(String s:xml.split("\n")){
-            sb.append(s.trim());
+    /**
+     * 解密
+     * @param src
+     * @param sKey
+     * @return
+     * @throws Exception
+     */
+    public static byte[] decrypt(byte[] src, String sKey) throws Exception {
+        byte[] key = sKey.getBytes();
+        // 初始化向量
+        IvParameterSpec iv = new IvParameterSpec(key);
+        // 创建一个DESKeySpec对象
+        DESKeySpec desKey = new DESKeySpec(key);
+        // 创建一个密匙工厂
+        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
+        // 将DESKeySpec对象转换成SecretKey对象
+        SecretKey securekey = keyFactory.generateSecret(desKey);
+        // Cipher对象实际完成解密操作
+        Cipher cipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
+        // 用密匙初始化Cipher对象
+        cipher.init(Cipher.DECRYPT_MODE, securekey, iv);
+        // 真正开始解密操作
+        return cipher.doFinal(src);
+    }
+
+    /**
+     * 将二进制转换成16进制
+     *
+     * @param buf
+     * @return
+     */
+    public static String parseByte2HexStr(byte buf[]) {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < buf.length; i++) {
+            String hex = Integer.toHexString(buf[i] & 0xFF);
+            if (hex.length() == 1) {
+                hex = '0' + hex;
+            }
+            sb.append(hex.toUpperCase());
         }
-        return  sb.toString();
+        return sb.toString();
+    }
+
+    /**
+     * 将16进制转换为二进制
+     *
+     * @param hexStr
+     * @return
+     */
+    public static byte[] parseHexStr2Byte(String hexStr) {
+        if (hexStr.length() < 1) return null;
+        byte[] result = new byte[hexStr.length() / 2];
+        for (int i = 0; i < hexStr.length() / 2; i++) {
+            int high = Integer.parseInt(hexStr.substring(i * 2, i * 2 + 1), 16);
+            int low = Integer.parseInt(hexStr.substring(i * 2 + 1, i * 2 + 2), 16);
+            result[i] = (byte) (high * 16 + low);
+        }
+        return result;
+    }
+
+    /**
+     * 加密
+     * @param srcStr
+     * @param charset
+     * @param sKey
+     * @return
+     */
+    public static String encrypt(String srcStr, Charset charset, String sKey) {
+        byte[] src = srcStr.getBytes(charset);
+        byte[] buf = Des2.encrypt(src, sKey);
+        return Des2.parseByte2HexStr(buf);
+    }
+
+    /**
+     * 解密
+     *
+     * @param hexStr
+     * @param sKey
+     * @return
+     * @throws Exception
+     */
+    public static String decrypt(String hexStr, Charset charset, String sKey) throws Exception {
+        byte[] src = Des2.parseHexStr2Byte(hexStr);
+        byte[] buf = Des2.decrypt(src, sKey);
+        return new String(buf, charset);
+    }
+
+
+    public static void main(String[] args) {
+        String  SKEY    = "10323880";
+        Charset CHARSET = Charset.forName("gb2312");
+        // 待加密内容
+        String str = "E10ADC3949BA59ABBE56E057F20F883E";
+        String encryptResult = Des2.encrypt(str, CHARSET, SKEY);
+        System.out.println(encryptResult);
+        // 直接将如上内容解密
+        String decryResult = "";
+        try {
+            decryResult = Des2.decrypt(encryptResult, CHARSET, SKEY);
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        System.out.println(decryResult);
     }
 }
