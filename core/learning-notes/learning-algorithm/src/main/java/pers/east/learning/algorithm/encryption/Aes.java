@@ -59,8 +59,26 @@ public class Aes {
         }
         return null;
     }
+    /**
+     * 将二进制转换成16进制
+     *
+     * @param buf
+     * @return
+     */
+    public static String parseByte2HexStr(byte buf[]) {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < buf.length; i++) {
+            String hex = Integer.toHexString(buf[i] & 0xFF);
+            if (hex.length() == 1) {
+                hex = '0' + hex;
+            }
+            sb.append(hex.toUpperCase());
+        }
+        return sb.toString();
+    }
 
     public static void main(String[] args) {
-        System.out.println(encrypt("E10ADC3949BA59ABBE56E057F20F883E","1032388"));
+        System.out.println(parseByte2HexStr(encrypt("E10ADC3949BA59ABBE56E057F20F883E","1032388")));
+        System.out.println(parseByte2HexStr("n4pRItzEYnYw6m3LnigkSWonKZYkAnB2NC6z6hC5MLruheD7ujOsrTJh5oQcGvOK".getBytes()));
     }
 }

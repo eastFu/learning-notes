@@ -207,13 +207,23 @@ public class Des {
 
         return null;
     }
-
+    public static String parseByte2HexStr(byte buf[]) {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < buf.length; i++) {
+            String hex = Integer.toHexString(buf[i] & 0xFF);
+            if (hex.length() == 1) {
+                hex = '0' + hex;
+            }
+            sb.append(hex.toUpperCase());
+        }
+        return sb.toString();
+    }
     public static void main(String[] args) {
         try {
             byte[] key = "75169000".getBytes();
             byte[] iv = "75169000".getBytes();
             byte[] data = Des.encrypt("E10ADC3949BA59ABBE56E057F20F883E".getBytes(), key);
-            System.out.println(new String(data));
+            System.out.println(parseByte2HexStr(data));
             System.out.print("EBC mode:");
             System.out.println(new String(Des.decrypt(data, key)));
             System.out.print("CBC mode:");
