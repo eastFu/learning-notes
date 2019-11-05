@@ -220,8 +220,8 @@ public class Des {
     }
     public static void main(String[] args) {
         try {
-            byte[] key = "75169000".getBytes();
-            byte[] iv = "75169000".getBytes();
+            byte[] key = "10323880".getBytes();
+            byte[] iv = "10323880".getBytes();
             byte[] data = Des.encrypt("E10ADC3949BA59ABBE56E057F20F883E".getBytes(), key);
             System.out.println(parseByte2HexStr(data));
             System.out.print("EBC mode:");

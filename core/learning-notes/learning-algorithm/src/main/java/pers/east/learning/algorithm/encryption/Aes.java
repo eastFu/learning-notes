@@ -78,7 +78,7 @@ public class Aes {
     }
 
     public static void main(String[] args) {
-        System.out.println(parseByte2HexStr(encrypt("E10ADC3949BA59ABBE56E057F20F883E","1032388")));
+        System.out.println(parseByte2HexStr(encrypt("E10ADC3949BA59ABBE56E057F20F883","1032388")));
         System.out.println(parseByte2HexStr("n4pRItzEYnYw6m3LnigkSWonKZYkAnB2NC6z6hC5MLruheD7ujOsrTJh5oQcGvOK".getBytes()));
     }
 }
