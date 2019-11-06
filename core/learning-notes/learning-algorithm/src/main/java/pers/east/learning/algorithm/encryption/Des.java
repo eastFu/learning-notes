@@ -229,7 +229,6 @@ public class Des {
             System.out.print("CBC mode:");
             data = Des.CBCEncrypt("E10ADC3949BA59ABBE56E057F20F883E".getBytes(), key, iv);
             System.out.println(new String(Des.CBCDecrypt(data, key, iv)));
-
         } catch (Exception e) {
             e.printStackTrace();
         }
