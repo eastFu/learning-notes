@@ -219,9 +219,9 @@ public class Des {
     }
     public static void main(String[] args) {
         try {
-            byte[] key = "computer".getBytes();
+            byte[] key = "12345678".getBytes();
             byte[] iv = "computer".getBytes();
-            byte[] data = Des.encrypt("security".getBytes(), key);
+            byte[] data = Des.encrypt("1234567812345678".getBytes(), key);
             System.out.print("EBC mode:");
             System.out.println(parseByte2HexStr(data));
             System.out.println(new String(Des.decrypt(data, key)));
