@@ -233,7 +233,7 @@ public class Des {
             e.printStackTrace();
         }
     }
-    
+
    /* public static void main(String[] args) throws Exception{
         String str = "E10ADC3949BA59ABBE56E057F20F883E";
         String encode = Des.encrypt(str, Charset.forName("utf8"), "12345678");

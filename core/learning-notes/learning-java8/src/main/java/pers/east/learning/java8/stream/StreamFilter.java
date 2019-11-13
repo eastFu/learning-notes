@@ -20,6 +20,5 @@ public class StreamFilter {
         System.out.println(list.stream().limit(6).collect(Collectors.toList()));
         System.out.println(list.stream().max(Integer::compare).get());
         Stream.of(8,3,4,1,2).forEach(System.out::println);
-
     }
 }
