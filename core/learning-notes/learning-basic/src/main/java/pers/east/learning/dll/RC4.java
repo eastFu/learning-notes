@@ -1,6 +1,6 @@
 package pers.east.learning.dll;
 
-public class Hex {
+public class RC4 {
 
     /**
      * 字节流转成十六进制表示
@@ -34,10 +34,8 @@ public class Hex {
     public static void main(String[] args) {
         String str = "U2FsdGVkX185Mi5xH92G3X0WMCMv9nhN3UMkgjB3PibXXyFeVY96kWgS3HgAHAFo";
         System.out.println("test string : "+str);
-
         String hexEncode = encode(str.getBytes());
         System.out.println("HexUtil.encode Result : "+hexEncode);
-
         byte[] bytes = decode(hexEncode);
         System.out.println("HexUtil.decode Result : "+new String(bytes));
 
