@@ -14,7 +14,6 @@ public class RC4 {
         }
         return sb.toString().trim();
     }
-
     /**
      * 字符串转成字节流
      */
