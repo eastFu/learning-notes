@@ -37,6 +37,5 @@ public class RC4 {
         System.out.println("HexUtil.encode Result : "+hexEncode);
         byte[] bytes = decode(hexEncode);
         System.out.println("HexUtil.decode Result : "+new String(bytes));
-
     }
 }
