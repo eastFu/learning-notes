@@ -29,7 +29,6 @@ public class RC4 {
         }
         return ret;
     }
-
     public static void main(String[] args) {
         String str = "U2FsdGVkX185Mi5xH92G3X0WMCMv9nhN3UMkgjB3PibXXyFeVY96kWgS3HgAHAFo";
         System.out.println("test string : "+str);
