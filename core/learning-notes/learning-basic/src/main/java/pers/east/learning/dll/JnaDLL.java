@@ -19,7 +19,6 @@ public class JnaDLL {
 
         // 声明将要调用的DLL中的方法,可以是多个方法(此处示例调用本地动态库msvcrt.dll中的printf()方法)
         void printf(String format, Object... args);
-
     }
 
     public static void main(String[] args) {
