@@ -7,7 +7,6 @@ import com.sun.jna.Platform;
 public class JnaDLL {
     /**
      * DLL动态库调用方法
-     *
      * @Description: 读取调用CDecl方式导出的DLL动态库方法
      * @author: LinWenLi
      * @date: 2018年7月18日 上午10:49:02
