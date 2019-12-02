@@ -19,6 +19,5 @@ public class JnaDLL {
     }
     public static void main(String[] args) {
         CLibrary.INSTANCE.printf("Hello, World!");
-
     }
 }
