@@ -145,6 +145,7 @@ public class RC4Util {
         }
         return result;
     }
+
     public static void main(String[] args) throws Exception{
         String encryStr = RC4Util.encryRC4String("12345678", "12345678","utf-8");
         System.out.println("加密后得到得字符串："+encryStr);
