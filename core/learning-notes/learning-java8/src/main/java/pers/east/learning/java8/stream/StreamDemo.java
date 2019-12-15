@@ -93,7 +93,6 @@ public class StreamDemo {
         System.out.println("【for and if】 data size: "+lowCaloricDishesName.size());
         System.out.println("【for and if】 cost time : "+(System.currentTimeMillis()-start1));
     }
-
     public static void testByLambda(){
         System.out.println("==================java8 pers.east.learning.java8.lambda====================");
         long start2 = System.currentTimeMillis();
