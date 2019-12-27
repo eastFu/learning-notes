@@ -68,7 +68,6 @@ public class StreamDemo {
         }
         System.out.println("test list size : "+menu.size());
     }
-    
     private static void testByForIf(){
         System.out.println("==================java7 for and if ====================");
         long start1 = System.currentTimeMillis();
