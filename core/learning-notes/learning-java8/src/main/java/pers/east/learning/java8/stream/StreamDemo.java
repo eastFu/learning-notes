@@ -129,5 +129,4 @@ public class StreamDemo {
         System.out.println("【java 8 pers.east.learning.java8.parallel pers.east.learning.java8.stream】 data size: "+lowCaloricDishesName4.size());
         System.out.println("【java 8 pers.east.learning.java8.parallel pers.east.learning.java8.stream】 cost time : "+(System.currentTimeMillis()-start4));
     }
-
 }
