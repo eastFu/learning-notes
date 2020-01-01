@@ -118,7 +118,6 @@ public class StreamDemo {
         System.out.println("【java 8 pers.east.learning.java8.stream】 data size: "+lowCaloricDishesName3.size());
         System.out.println("【java 8 pers.east.learning.java8.stream】 cost time : "+(System.currentTimeMillis()-start3));
     }
-    
     public static void testByParallelStream(){
         System.out.println("==================java 8 pers.east.learning.java8.parallel Stream====================");
         long start4 = System.currentTimeMillis();
