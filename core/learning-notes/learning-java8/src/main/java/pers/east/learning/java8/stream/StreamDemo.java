@@ -107,7 +107,6 @@ public class StreamDemo {
         System.out.println("【for and if】 data size: "+lowCaloricDishesName2.size());
         System.out.println("【for and if】 cost time : "+(System.currentTimeMillis()-start2));
     }
-
     public static void testByStream(){
         System.out.println("==================java 8 pers.east.learning.java8.stream====================");
         long start3 = System.currentTimeMillis();
