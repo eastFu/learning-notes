@@ -5,7 +5,6 @@ import java.util.ServiceLoader;
 public class SpiTest {
 
     public static void main(String[] args) {
-
         /**
          *
          * SPI 全称为 (Service Provider Interface) ,是JDK内置的一种服务提供发现机制。
