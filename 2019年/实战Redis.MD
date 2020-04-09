@@ -39,7 +39,6 @@
 	auto-aof-rewrite-percentage 100
 	auto-aof-rewrite-min-size 64mb
 
-
 ### 3. Redis持久化方式RDB和AOF
 
 * RDB持久化是指在指定的时间间隔内将内存中的数据集快照写入磁盘，实际操作过程是fork一个子进程，先将数据集写入临时文件，写入成功后，再替换之前的文件，用二进制压缩存储。
