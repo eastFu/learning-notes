@@ -381,10 +381,6 @@ public interface Collector<T, A, R> {
 
 
 
-
-
-
-
 ![](img/completable-future.png)
 # 7. New Date API
 
