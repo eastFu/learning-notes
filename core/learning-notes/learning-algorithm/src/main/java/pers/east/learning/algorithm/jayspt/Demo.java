@@ -5,6 +5,7 @@ import org.jasypt.util.text.BasicTextEncryptor;
 public class Demo {
 
     public static void main(String[] args) {
+        
         BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
         //设置加密密钥
         textEncryptor.setPassword("MySalt");
