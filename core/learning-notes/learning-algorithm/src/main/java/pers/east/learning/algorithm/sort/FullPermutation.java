@@ -1,7 +1,6 @@
 package pers.east.learning.algorithm.sort;
 
 import java.util.Arrays;
-
 /**
  * 全排列
  * @author eastFu

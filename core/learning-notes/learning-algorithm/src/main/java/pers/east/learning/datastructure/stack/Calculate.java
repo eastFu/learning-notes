@@ -29,7 +29,7 @@ public class Calculate {
         }
         return myStack.pop();
     }
-    
+
     public static void main(String[] args) throws ScriptException {
         String str = PostInfix.doTransfer("(3+2)/5-((7+8)*4-5)");
         System.out.println(calculation(str));
