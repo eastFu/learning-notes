@@ -1,5 +1,4 @@
 # Hadoop
 
 
-SSS
 
