@@ -11,10 +11,29 @@ import java.security.SecureRandom;
 
 /**
  * des 加密算法
+ * <p>
+ * mode : ECB/CBC/CTR/OFB/CFB
+ * <p>
+ * padding: pkcs5padding/pkcs7padding/zeropadding/ios10126/ansix923
+ * <p>
+ * out:base64/hex
+ * <p>
+ * encode: gb2312/gbk/utf8
  */
 public class Des {
+
+
     /**
-     *
+     * 加密/解密算法-工作模式-填充模式
+     */
+    private static final String CBC = "DES/CBC/PKCS5Padding";
+
+    private static final String OFB = "DES/OFB/PKCS5Padding";
+
+    private static final String CFB = "DES/CFB/PKCS5Padding";
+
+
+    /**
      * @return DES算法密钥
      */
     public static byte[] generateKey() {
@@ -45,16 +64,12 @@ public class Des {
     /**
      * 加密函数
      *
-     * @param data
-     *            加密数据
-     * @param key
-     *            密钥
+     * @param data 加密数据
+     * @param key  密钥
      * @return 返回加密后的数据
      */
     public static byte[] encrypt(byte[] data, byte[] key) {
-
         try {
-
             // DES算法要求有一个可信任的随机数源
             SecureRandom sr = new SecureRandom();
 
@@ -67,7 +82,7 @@ public class Des {
             SecretKey secretKey = keyFactory.generateSecret(dks);
 
             // using DES in ECB mode
-            Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
+            Cipher cipher = Cipher.getInstance(Des.OFB);
 
             // 用密匙初始化Cipher对象
             cipher.init(Cipher.ENCRYPT_MODE, secretKey, sr);
@@ -87,10 +102,8 @@ public class Des {
     /**
      * 解密函数
      *
-     * @param data
-     *            解密数据
-     * @param key
-     *            密钥
+     * @param data 解密数据
+     * @param key  密钥
      * @return 返回解密后的数据
      */
     public static byte[] decrypt(byte[] data, byte[] key) {
@@ -109,7 +122,7 @@ public class Des {
             SecretKey secretKey = keyFactory.generateSecret(dks);
 
             // using DES in ECB mode
-            Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
+            Cipher cipher = Cipher.getInstance(Des.OFB);
 
             // 用密匙初始化Cipher对象
             cipher.init(Cipher.DECRYPT_MODE, secretKey, sr);
@@ -129,10 +142,8 @@ public class Des {
     /**
      * 加密函数
      *
-     * @param data
-     *            加密数据
-     * @param key
-     *            密钥
+     * @param data 加密数据
+     * @param key  密钥
      * @return 返回加密后的数据
      */
     public static byte[] CBCEncrypt(byte[] data, byte[] key, byte[] iv) {
@@ -170,10 +181,8 @@ public class Des {
     /**
      * 解密函数
      *
-     * @param data
-     *            解密数据
-     * @param key
-     *            密钥
+     * @param data 解密数据
+     * @param key  密钥
      * @return 返回解密后的数据
      */
     public static byte[] CBCDecrypt(byte[] data, byte[] key, byte[] iv) {
@@ -206,6 +215,7 @@ public class Des {
 
         return null;
     }
+
     public static String parseByte2HexStr(byte buf[]) {
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < buf.length; i++) {
@@ -217,28 +227,17 @@ public class Des {
         }
         return sb.toString();
     }
+
     public static void main(String[] args) {
         try {
-            byte[] key = "12345678".getBytes();
-            byte[] iv = "computer".getBytes();
-            byte[] data = Des.encrypt("1234567812345678".getBytes(), key);
-            System.out.print("EBC mode:");
+            byte[] key = "6B83A9ECBE1F8D9A".getBytes();
+            byte[] data = Des.encrypt("abc123abc123".getBytes(), key);
             System.out.println(parseByte2HexStr(data));
-            System.out.println(new String(Des.decrypt(data, key)));
-            System.out.print("CBC mode:");
-            data = Des.CBCEncrypt("security".getBytes(), key, iv);
-            System.out.println(parseByte2HexStr(data));
-            System.out.println(new String(Des.CBCDecrypt(data, key, iv)));
+
+
+            System.out.println(parseByte2HexStr(Des.decrypt(data,key)));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-   /* public static void main(String[] args) throws Exception{
-        String str = "E10ADC3949BA59ABBE56E057F20F883E";
-        String encode = Des.encrypt(str, Charset.forName("utf8"), "12345678");
-        System.out.println(encode);
-        String decode = Des.encrypt(encode, Charset.forName("utf8"), "12345678");
-        System.out.println(decode);
-    }*/
 }
