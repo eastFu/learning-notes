@@ -5,7 +5,6 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.IvParameterSpec;
-import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
 public class DesCbcSecurity {
@@ -15,8 +14,13 @@ public class DesCbcSecurity {
 
 
     public static void main(String[] args) throws Exception {
+
+        byte[] b=new byte[]{36,29,192-256,10,75,175-256,209-256,182-256,246-256,121,53,81,59,50,110,142-256,224-256,195-256,143-256,119,146-256,189-256,245-256,192-256,91,57,45,190-256,89,101,143-256,24};
+
+        System.out.println(byteToHexString(b));
+
         String aaaString = "E99A18C428CB38D5F260853678922E03";
-        String key = "1234567812345678";
+        String key = "1050629";
         System.out.println("加密前：" + aaaString);
         String encrypedString = encrypt(aaaString, key);
 
@@ -34,7 +38,8 @@ public class DesCbcSecurity {
      */
     public static String encrypt(String content, String key) {
         System.out.println(Arrays.toString(key.getBytes()));
-        byte[] bt=new byte[]{77,162-256,54,229-256,95,6,199-256,69};
+//        byte[] bt=new byte[]{77,162-256,54,229-256,95,6,199-256,69};
+        byte[] bt=new byte[]{105,214-256,68,92,187-256,159-256,59,199-256};
         System.out.println(new String(bt));
         return byteToHexString(encrypt(content.getBytes(), bt));
     }

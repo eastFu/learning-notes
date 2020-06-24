@@ -41,8 +41,8 @@ public class AesUtil {
         Cipher cipher = Cipher.getInstance(AESTYPE);
         cipher.init(Cipher.ENCRYPT_MODE, getKey(keyStr));
         encrypt = cipher.doFinal(plainText.getBytes("utf-8"));
-        // return parseByte2HexStr(encrypt);
-        return Base64.getEncoder().encodeToString(encrypt);
+        return parseByte2HexStr(encrypt);
+        //return Base64.getEncoder().encodeToString(encrypt);
     }
 
     /**
@@ -118,8 +118,8 @@ public class AesUtil {
     }
 
     public static void main(String[] args) throws Exception{
-        String secretkey = "123456";
-        String secretSign = AesUtil.aesEncrypt(secretkey,"test");
+        String secretkey = "1050629";
+        String secretSign = AesUtil.aesEncrypt(secretkey,"E99A18C428CB38D5F260853678922E03");
         System.out.println(secretSign);
         System.out.println(aesDecrypt(secretkey, secretSign));
     }
