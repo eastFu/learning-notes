@@ -15,7 +15,7 @@ public class Des3 {
 
     private static final String KEY_ALGORITHM = "DESede";
 
-    private static final String DEFAULT_CIPHER_ALGORITHM = "DESede/ECB/PKCS5Padding";// 默认的加密算法
+    private static final String DEFAULT_CIPHER_ALGORITHM = "DESede/ECB/NoPadding";// 默认的加密算法
 
     private static final String CBC = "DESede/CBC/NoPadding";
 
@@ -31,13 +31,13 @@ public class Des3 {
 
     // 加密
     public static String encrypt(String sSrc) throws Exception {
-        Cipher cipher = Cipher.getInstance(CBC);
+        Cipher cipher = Cipher.getInstance(DEFAULT_CIPHER_ALGORITHM);
 //        byte[] raw = sKey.getBytes();
         byte[] raw = hex(sKey);
         SecretKeySpec skeySpec = new SecretKeySpec(raw, "DESede");
         byte[] bt=new byte[]{1,35,69,103,137-256,171-256,205-256,239-256};
         IvParameterSpec iv = new IvParameterSpec(ivParameter.getBytes("gbk"));
-        cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
+        cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
         byte[] encrypted = cipher.doFinal(sSrc.getBytes());
         return getHexString(encrypted);
     }
@@ -123,7 +123,7 @@ public class Des3 {
         try {
             byte[] raw = hex(sKey);
             SecretKeySpec skeySpec = new SecretKeySpec(raw, "DESede");
-            Cipher cipher = Cipher.getInstance("DESede/CBC/PKCS5Padding");
+            Cipher cipher = Cipher.getInstance(DEFAULT_CIPHER_ALGORITHM);
             IvParameterSpec iv = new IvParameterSpec(ivParameter.getBytes());
             cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);
 //            byte[] encrypted1 = new BASE64Decoder().decodeBuffer(sSrc);// 先用base64解密
@@ -139,6 +139,7 @@ public class Des3 {
         // 加密
         String enString = Des3.encrypt("E99A18C428CB38D5F260853678922E03");
         System.out.println("加密后的字串是：" + enString);
+        System.out.println(Des3.decrypt(enString));
     }
 
 }
