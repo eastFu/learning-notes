@@ -5,6 +5,7 @@ import org.apache.commons.codec.binary.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.UnsupportedEncodingException;
@@ -37,6 +38,13 @@ public class Des3 {
         SecretKeySpec skeySpec = new SecretKeySpec(raw, "DESede");
         byte[] bt=new byte[]{1,35,69,103,137-256,171-256,205-256,239-256};
         IvParameterSpec iv = new IvParameterSpec(ivParameter.getBytes("gbk"));
+
+
+        KeyGenerator keyGen = KeyGenerator.getInstance("DESede");//密钥生成器
+        keyGen.init(168); //可指定密钥长度为112或168，默认为168
+        SecretKey secretKey = keyGen.generateKey();//生成密钥
+        byte[] key = secretKey.getEncoded();//密钥字节数组
+
         cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
         byte[] encrypted = cipher.doFinal(sSrc.getBytes());
         return getHexString(encrypted);
