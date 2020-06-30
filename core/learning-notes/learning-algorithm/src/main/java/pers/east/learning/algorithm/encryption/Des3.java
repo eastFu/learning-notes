@@ -1,22 +1,28 @@
 package pers.east.learning.algorithm.encryption;
 
 import org.apache.commons.codec.binary.Base64;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
+import javax.crypto.spec.DESedeKeySpec;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.security.Provider;
 import java.security.SecureRandom;
+import java.security.spec.KeySpec;
+import java.util.Arrays;
 
 public class Des3 {
 
-    private static final String KEY_ALGORITHM = "DESede";
+    private static final String KEY_ALGORITHM = "DES";
 
-    private static final String DEFAULT_CIPHER_ALGORITHM = "DESede/ECB/NoPadding";// 默认的加密算法
+    private static final String DEFAULT_CIPHER_ALGORITHM = "DES/ECB/NoPadding";// 默认的加密算法
 
     private static final String CBC = "DESede/CBC/NoPadding";
 
@@ -35,15 +41,21 @@ public class Des3 {
         Cipher cipher = Cipher.getInstance(DEFAULT_CIPHER_ALGORITHM);
 //        byte[] raw = sKey.getBytes();
         byte[] raw = hex(sKey);
-        SecretKeySpec skeySpec = new SecretKeySpec(raw, "DESede");
-        byte[] bt=new byte[]{1,35,69,103,137-256,171-256,205-256,239-256};
-        IvParameterSpec iv = new IvParameterSpec(ivParameter.getBytes("gbk"));
 
+        SecretKeySpec skeySpec = new SecretKeySpec(raw, KEY_ALGORITHM);
 
-        KeyGenerator keyGen = KeyGenerator.getInstance("DESede");//密钥生成器
-        keyGen.init(168); //可指定密钥长度为112或168，默认为168
-        SecretKey secretKey = keyGen.generateKey();//生成密钥
-        byte[] key = secretKey.getEncoded();//密钥字节数组
+//        KeyGenerator keyGen = KeyGenerator.getInstance("DESede");//密钥生成器
+//        keyGen.init(112); //可指定密钥长度为112或168，默认为168
+//        SecretKey secretKey = keyGen.generateKey();//生成密钥
+//        byte[] key = secretKey.getEncoded();//密钥字节数组
+//
+//        System.out.println(Arrays.toString(skeySpec.getEncoded()));
+//
+//
+//        Provider provider = new BouncyCastleProvider();
+//        KeySpec keySpec = new DESedeKeySpec(raw);
+//        SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance("DESede", provider);
+//        SecretKey secretKey2 = secretKeyFactory.generateSecret(keySpec);
 
         cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
         byte[] encrypted = cipher.doFinal(sSrc.getBytes());
@@ -51,8 +63,11 @@ public class Des3 {
     }
 
     public static byte[] hex(String keyStr) throws UnsupportedEncodingException {
-        byte[] key = new byte[24];    //声明一个24位的字节数组，默认里面都是0
+        byte[] key = new byte[8];    //声明一个24位的字节数组，默认里面都是0
         byte[] temp = keyStr.getBytes("gbk");    //将字符串转成字节数组
+
+        //System.out.println(Arrays.toString(temp));
+        temp=new byte[]{105,214-256,68,92,187-256,159-256,59,199-256};
         /*
          * 执行数组拷贝
          * System.arraycopy(源数组，从源数组哪里开始拷贝，目标数组，拷贝多少位)
@@ -130,13 +145,14 @@ public class Des3 {
     public static String decrypt(String sSrc) throws Exception {
         try {
             byte[] raw = hex(sKey);
-            SecretKeySpec skeySpec = new SecretKeySpec(raw, "DESede");
+            SecretKeySpec skeySpec = new SecretKeySpec(raw, KEY_ALGORITHM);
             Cipher cipher = Cipher.getInstance(DEFAULT_CIPHER_ALGORITHM);
-            IvParameterSpec iv = new IvParameterSpec(ivParameter.getBytes());
-            cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);
-//            byte[] encrypted1 = new BASE64Decoder().decodeBuffer(sSrc);// 先用base64解密
+            cipher.init(Cipher.DECRYPT_MODE, skeySpec);
+
             byte[] encrypted1 = hexStringToBytes(sSrc);
+
             byte[] original = cipher.doFinal(encrypted1);
+
             String originalString = new String(original, "utf-8");
             return originalString;
         } catch (Exception ex) {
@@ -145,7 +161,8 @@ public class Des3 {
     }
     public static void main(String[] args) throws Exception {
         // 加密
-        String enString = Des3.encrypt("E99A18C428CB38D5F260853678922E03");
+//        String enString = Des3.encrypt("E99A18C428CB38D5F260853678922E03");
+        String enString = Des3.encrypt("12341234");
         System.out.println("加密后的字串是：" + enString);
         System.out.println(Des3.decrypt(enString));
     }
