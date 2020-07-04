@@ -48,7 +48,6 @@ public class TestEncryption {
         return "";
     }
 
-
     public static byte[] getDesKey1(String key) throws NoSuchAlgorithmException, InvalidKeySpecException, InvalidKeyException, UnsupportedEncodingException {
         byte[] mode = new byte[8];
         byte[] temp = key.getBytes("gbk");
