@@ -41,7 +41,6 @@ public class Aes {
             cipher.init(Cipher.ENCRYPT_MODE, key);// 初始化为加密模式的密码器
 
             byte[] result = cipher.doFinal(byteContent);// 加密
-
             return result;
 
         } catch (NoSuchPaddingException e) {
