@@ -58,6 +58,7 @@ public class Aes {
         }
         return null;
     }
+
     /**
      * 将二进制转换成16进制
      *
