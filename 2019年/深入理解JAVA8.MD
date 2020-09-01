@@ -155,7 +155,7 @@ public class StreamDemo {
 
 利用jconsole查看stream和parallel stream的区别
 
-![并行流](img/parallelstream.png)
+![并行流](https://raw.github.com/eastFu/docs/master/learning-notes-img/2019/parallelstream.png)
 
 > 1. 测试用例描述 ： 准备 1 个亿的 dish 数据， 从中取出 卡路里 低于400 的水果，并进行排序
  *  传统 for if 实现
@@ -381,7 +381,7 @@ public interface Collector<T, A, R> {
 
 
 
-![](img/completable-future.png)
+![](https://raw.github.com/eastFu/docs/master/learning-notes-img/2019/completable-future.png)
 # 7. New Date API
 
 ## 7.1 LocalDate
