@@ -15,7 +15,7 @@ public class Client {
 
     public static String IP = "127.0.0.1";
 
-    public static int PORT = 8899;
+    public static int PORT = 8752;
 
     public static void main(String[] args) {
         EventLoopGroup client = new NioEventLoopGroup();
