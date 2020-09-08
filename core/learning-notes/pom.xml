@@ -14,6 +14,7 @@
         <module>learning-java8</module>
         <module>learning-thread</module>
         <module>learning-algorithm</module>
+        <module>learning-netty</module>
     </modules>
 
     <name>learning-notes</name>
@@ -33,6 +34,14 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.47</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.21</version>
+        </dependency>
+
 
         <dependency>
             <groupId>junit</groupId>
