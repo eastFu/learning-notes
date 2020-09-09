@@ -20,13 +20,12 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        
+
         LOGGER.info("client {} connected.", ctx.channel().remoteAddress());
-        for (int i=0;i<1000;i++){
+        for (int i=0;i<5;i++){
             ctx.writeAndFlush(Unpooled.copiedBuffer("hello client!"+i, CharsetUtil.UTF_8));
             Thread.sleep(100);
         }
-
         ctx.writeAndFlush(Unpooled.copiedBuffer("finish", CharsetUtil.UTF_8));
     }
 

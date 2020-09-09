@@ -14,7 +14,7 @@ public class Server {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Server.class);
 
-    public static final int PORT = 8752;
+    public static final int PORT = 9527;
 
     public static void main(String[] args) {
         /**

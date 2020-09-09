@@ -13,9 +13,9 @@ public class Client {
 
     private static Logger LOGGER = LoggerFactory.getLogger(Client.class);
 
-    public static String IP = "127.0.0.1";
+    public static String IP = "192.168.8.78";
 
-    public static int PORT = 8752;
+    public static int PORT = 9527;
 
     public static void main(String[] args) {
         EventLoopGroup client = new NioEventLoopGroup();
