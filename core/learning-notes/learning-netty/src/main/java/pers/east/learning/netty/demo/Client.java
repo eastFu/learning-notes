@@ -18,8 +18,10 @@ public class Client {
     public static int PORT = 9527;
 
     public static void main(String[] args) {
+        
         EventLoopGroup client = new NioEventLoopGroup();
         try {
+
             Bootstrap bootstrap = new Bootstrap();
             bootstrap.group(client)
                     .channel(NioSocketChannel.class)
