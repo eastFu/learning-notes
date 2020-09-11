@@ -18,7 +18,7 @@ public class Client {
     public static int PORT = 9527;
 
     public static void main(String[] args) {
-        
+
         EventLoopGroup client = new NioEventLoopGroup();
         try {
 
@@ -33,7 +33,6 @@ public class Client {
                             p.addLast(new ClientHandler());
                         }
                     });
-
             ChannelFuture f = bootstrap.connect(IP,PORT).sync();
             f.channel().closeFuture().sync();
         } catch (Exception e) {
