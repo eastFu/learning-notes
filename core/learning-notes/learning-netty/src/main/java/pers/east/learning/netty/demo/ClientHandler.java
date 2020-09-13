@@ -26,7 +26,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
         ctx.writeAndFlush(Unpooled.copiedBuffer("hello server!\r\n", CharsetUtil.UTF_8));
     }
 
-    
+
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         ByteBuf byteBuf = (ByteBuf) msg;
