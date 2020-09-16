@@ -21,7 +21,6 @@ public class Client {
 
         EventLoopGroup client = new NioEventLoopGroup();
         try {
-
             Bootstrap bootstrap = new Bootstrap();
             bootstrap.group(client)
                     .channel(NioSocketChannel.class)
