@@ -15,6 +15,7 @@
         <module>learning-thread</module>
         <module>learning-algorithm</module>
         <module>learning-netty</module>
+        <module>learning-influxdb</module>
     </modules>
 
     <name>learning-notes</name>
