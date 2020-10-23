@@ -85,6 +85,7 @@ public class DemoInfluxDB {
         fields1.put("field1", "abc");
         // 数值型，InfluxDB的字段类型，由第一天插入的值得类型决定
         fields1.put("field2", 123456);
+        
         Map<String, Object> fields2 = new HashMap<String, Object>();
         fields2.put("field1", "String类型");
         fields2.put("field2", 3.141592657);
