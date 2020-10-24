@@ -7,12 +7,47 @@
 
 
 ```
+#zookeeper下载地址：
+https://zookeeper.apache.org/releases.html
+
+#解压缩zookeeper
+tar -zxvf apache-zookeeper-3.6.2-bin.tar.gz
+
+
+##修改配置 conf/zoo.cfg
+dataDir=/data/zk/node1/data
+clientPort=2181
+
+server.1=localhost:2287:3387
+server.2=localhost:2288:3388
+server.3=localhost:2289:3389
+
+
+echo 1 >> /data/zk/node1/data/myid
+echo 2 >> /data/zk/node2/data/myid
+echo 3 >> /data/zk/node3/data/myid
+
+##启动zookeeper
+./zkServer.sh start ../conf/zoo1.cfg
+./zkServer.sh start ../conf/zoo2.cfg
+./zkServer.sh start ../conf/zoo3.cfg
 
 #kafka下载地址：
 http://kafka.apache.org/downloads
 
-#zookeeper下载地址：
-https://zookeeper.apache.org/releases.html
+# 解压缩
+tar -zxvf kafka_2.11-2.2.2.tgz
+
+#修改 conf/server.properties
+broker.id=0
+listeners=PLAINTEXT://hostname:9092
+log.dirs=/data/kafka-logs/kafka3
+zookeeper.connect=zk1:2181,zk3:2181,zk3:2181
+
+
+#启动
+./kafka-server-start.sh -daemon ../config/server.properties
+
 
 ```
 
@@ -70,7 +105,14 @@ zookeeper.connect=192.168.7.100:12181,192.168.7.101:12181,192.168.7.107:1218 #�
 ./kafka-server-start.sh -daemon ../config/server.properties
 
 
+kafka1/bin/kafka-server-start.sh -daemon kafka1/config/server.properties
+kafka2/bin/kafka-server-start.sh -daemon kafka2/config/server.properties
+kafka3/bin/kafka-server-start.sh -daemon kafka3/config/server.properties
 
+#暂停
+kafka1/bin/kafka-server-stop.sh
+kafka2/bin/kafka-server-stop.sh
+kafka3/bin/kafka-server-stop.sh
 
 
 #创建Topic
