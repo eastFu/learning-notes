@@ -13,7 +13,6 @@ https://zookeeper.apache.org/releases.html
 #解压缩zookeeper
 tar -zxvf apache-zookeeper-3.6.2-bin.tar.gz
 
-
 ##修改配置 conf/zoo.cfg
 dataDir=/data/zk/node1/data
 clientPort=2181
