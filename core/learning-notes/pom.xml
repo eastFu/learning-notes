@@ -17,6 +17,7 @@
         <module>learning-netty</module>
         <module>learning-influxdb</module>
         <module>learning-storm</module>
+        <module>learning-kafka</module>
     </modules>
 
     <name>learning-notes</name>
