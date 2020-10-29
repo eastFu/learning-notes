@@ -37,5 +37,4 @@ public class MyProducer{
         }
         producer.close();
     }
-
 }
