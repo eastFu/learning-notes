@@ -7,10 +7,11 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 
 import java.util.Collections;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 public class MyConsumer{
 
-    private static final String KAFKA_BROKERS = "10.12.53.5:9092,10.12.53.6:9092,10.12.53.7:9092";
+    private static final String KAFKA_BROKERS = "storm-cluster1.gyyx.cn:9092,storm-cluster2.gyyx.cn:9092,storm-cluster3.gyyx.cn:9092,storm-cluster4.gyyx.cn:9092,storm-cluster5.gyyx.cn:9092";
 
     private final KafkaConsumer<String, String> consumer;
 
@@ -35,13 +36,14 @@ public class MyConsumer{
         this.consumer.subscribe(Collections.singletonList(topic));
     }
 
-    public void doIt() {
+    public void doIt() throws InterruptedException {
         System.out.println("---------开始消费---------");
         while (true) {
             msgList = consumer.poll(100);
             for (ConsumerRecord<String, String> record : msgList) {
-                System.out.println(String.format("topic:%s,offset:%d,消息:%s", //
+                System.out.println(String.format("Consumer receive a msg --- topic:%s,offset:%d,消息:%s", //
                         record.topic(), record.offset(), record.value()));
+                TimeUnit.SECONDS.sleep(2);
             }
         }
         //consumer.close();

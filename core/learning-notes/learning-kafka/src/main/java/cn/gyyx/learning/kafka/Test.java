@@ -4,11 +4,11 @@ public class Test {
 
     public static void main(String[] args) throws InterruptedException {
 
-        MyProducer myProducer = new MyProducer("didi");
-        myProducer.doIt();
+        /*MyProducer myProducer = new MyProducer("didi");
+        myProducer.doIt();*/
 
-        /*MyConsumer myConsumer = new MyConsumer("didi");
-        myConsumer.doIt();*/
+        MyConsumer myConsumer = new MyConsumer("nginx_topic");
+        myConsumer.doIt();
 
        /* Properties p = new Properties();
         p.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "10.12.53.5:9092");
