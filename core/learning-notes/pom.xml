@@ -18,6 +18,7 @@
         <module>learning-influxdb</module>
         <module>learning-storm</module>
         <module>learning-kafka</module>
+        <module>learning-canal</module>
     </modules>
 
     <name>learning-notes</name>
