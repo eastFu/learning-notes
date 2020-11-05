@@ -11,6 +11,7 @@ import java.util.List;
 
 public class CanalClient {
 
+
     public static void main(String args[]) {
         // 创建链接
         CanalConnector connector = CanalConnectors.newSingleConnector(new InetSocketAddress(AddressUtils.getHostIp(),
