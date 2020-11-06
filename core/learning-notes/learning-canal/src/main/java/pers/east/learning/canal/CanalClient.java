@@ -90,4 +90,5 @@ public class CanalClient {
             System.out.println(column.getName() + " : " + column.getValue() + "    update=" + column.getUpdated());
         }
     }
+
 }
