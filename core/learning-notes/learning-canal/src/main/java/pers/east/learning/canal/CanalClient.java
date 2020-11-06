@@ -84,6 +84,7 @@ public class CanalClient {
             }
         }
     }
+    
 
     private static void printColumn(List<CanalEntry.Column> columns) {
         for (CanalEntry.Column column : columns) {
