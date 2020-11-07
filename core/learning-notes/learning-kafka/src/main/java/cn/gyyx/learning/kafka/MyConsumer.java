@@ -19,7 +19,7 @@ public class MyConsumer{
 
     private final String topic;
 
-    private static final String GROUP_ID = "groupB";
+    private static final String GROUP_ID = "group111";
 
     public MyConsumer(String topicName) {
         Properties props = new Properties();

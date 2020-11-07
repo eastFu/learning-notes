@@ -7,7 +7,7 @@ public class Test {
         /*MyProducer myProducer = new MyProducer("didi");
         myProducer.doIt();*/
 
-        MyConsumer myConsumer = new MyConsumer("nginx_topic");
+        MyConsumer myConsumer = new MyConsumer("example");
         myConsumer.doIt();
 
        /* Properties p = new Properties();
