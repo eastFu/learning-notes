@@ -19,6 +19,7 @@
         <module>learning-storm</module>
         <module>learning-kafka</module>
         <module>learning-canal</module>
+        <module>learning-postgresql</module>
     </modules>
 
     <name>learning-notes</name>
