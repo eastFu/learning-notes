@@ -11,7 +11,9 @@ import java.util.concurrent.TimeUnit;
 
 public class MyConsumer{
 
-    private static final String KAFKA_BROKERS = "storm-cluster1.gyyx.cn:9092,storm-cluster2.gyyx.cn:9092,storm-cluster3.gyyx.cn:9092,storm-cluster4.gyyx.cn:9092,storm-cluster5.gyyx.cn:9092";
+//    private static final String KAFKA_BROKERS = "storm-cluster1.gyyx.cn:9092,storm-cluster2.gyyx.cn:9092,storm-cluster3.gyyx.cn:9092,storm-cluster4.gyyx.cn:9092,storm-cluster5.gyyx.cn:9092";
+
+    private static final String KAFKA_BROKERS = "pm0400:9092";
 
     private final KafkaConsumer<String, String> consumer;
 
@@ -19,7 +21,7 @@ public class MyConsumer{
 
     private final String topic;
 
-    private static final String GROUP_ID = "group111";
+    private static final String GROUP_ID = "testCanal";
 
     public MyConsumer(String topicName) {
         Properties props = new Properties();
@@ -28,7 +30,7 @@ public class MyConsumer{
         props.put("enable.auto.commit", "true");
         props.put("auto.commit.interval.ms", "1000");
         props.put("session.timeout.ms", "30000");
-        props.put("auto.offset.reset", "earliest");
+//        props.put("auto.offset.reset", "earliest");
         props.put("key.deserializer", StringDeserializer.class.getName());
         props.put("value.deserializer", StringDeserializer.class.getName());
         this.consumer = new KafkaConsumer<String, String>(props);
@@ -39,7 +41,7 @@ public class MyConsumer{
     public void doIt() throws InterruptedException {
         System.out.println("---------开始消费---------");
         while (true) {
-            msgList = consumer.poll(100);
+            msgList = consumer.poll(10);
             for (ConsumerRecord<String, String> record : msgList) {
                 System.out.println(String.format("Consumer receive a msg --- topic:%s,offset:%d,消息:%s", //
                         record.topic(), record.offset(), record.value()));
