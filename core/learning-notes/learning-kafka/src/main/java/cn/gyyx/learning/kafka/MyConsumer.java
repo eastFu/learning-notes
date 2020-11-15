@@ -38,6 +38,7 @@ public class MyConsumer{
         this.consumer.subscribe(Collections.singletonList(topic));
     }
 
+
     public void doIt() throws InterruptedException {
         System.out.println("---------开始消费---------");
         while (true) {
