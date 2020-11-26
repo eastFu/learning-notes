@@ -23,7 +23,7 @@ public class MyConsumer{
 
     private static final String GROUP_ID = "testCanal";
 
-
+    
     public MyConsumer(String topicName) {
         Properties props = new Properties();
         props.put("bootstrap.servers", KAFKA_BROKERS);
