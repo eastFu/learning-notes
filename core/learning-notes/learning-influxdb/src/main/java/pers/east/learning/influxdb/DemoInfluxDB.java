@@ -112,7 +112,7 @@ public class DemoInfluxDB {
         Map<String, Object> fields2 = new HashMap<String, Object>();
         fields2.put("field1", "String类型");
         fields2.put("field2", 3.141592657);
-        
+
         // 一条记录值
         Point point1 = influxDBConnection.pointBuilder("表名", System.currentTimeMillis(), tags1, fields1);
         Point point2 = influxDBConnection.pointBuilder("表名", System.currentTimeMillis(), tags2, fields2);
