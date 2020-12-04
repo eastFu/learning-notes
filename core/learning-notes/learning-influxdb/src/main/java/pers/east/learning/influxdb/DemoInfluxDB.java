@@ -62,7 +62,7 @@ public class DemoInfluxDB {
         }
     }
 
-    
+
     private static void testInsert(){
         Map<String, String> tags = new HashMap<String, String>();
         tags.put("tag1", "标签值");
