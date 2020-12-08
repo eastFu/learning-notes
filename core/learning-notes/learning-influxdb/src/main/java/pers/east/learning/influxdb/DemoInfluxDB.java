@@ -72,7 +72,6 @@ public class DemoInfluxDB {
         // 时间使用毫秒为单位
         influxDBConnection.insert("表名", tags, fields, System.currentTimeMillis(), TimeUnit.MILLISECONDS);
     }
-    
 
     private static void testBatchInsert(){
         Map<String, String> tags = new HashMap<String, String>();
