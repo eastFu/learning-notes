@@ -7,9 +7,8 @@ public class Test {
         /*MyProducer myProducer = new MyProducer("didi");
         myProducer.doIt();*/
 
-        MyConsumer myConsumer = new MyConsumer("example");
+        MyConsumer myConsumer = new MyConsumer("nginx_topic");
         myConsumer.doIt();
-
 
        /* Properties p = new Properties();
         p.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "10.12.53.5:9092");

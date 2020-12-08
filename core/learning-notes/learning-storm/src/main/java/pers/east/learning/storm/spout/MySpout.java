@@ -42,7 +42,9 @@ public class MySpout extends BaseRichSpout {
     //声明输出字段
     @Override
     public void declareOutputFields(OutputFieldsDeclarer outputFieldsDeclarer) {
-        outputFieldsDeclarer.declare(new Fields("str"));
+        outputFieldsDeclarer.declare(new Fields("step1"));
     }
+
+
 
 }

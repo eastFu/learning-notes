@@ -9,6 +9,7 @@ import org.apache.storm.generated.InvalidTopologyException;
 import org.apache.storm.generated.StormTopology;
 import org.apache.storm.topology.TopologyBuilder;
 import pers.east.learning.storm.bolt.FirstBolt;
+import pers.east.learning.storm.bolt.SecondBolt;
 import pers.east.learning.storm.spout.MySpout;
 
 import java.util.concurrent.TimeUnit;
@@ -23,7 +24,7 @@ public class Demo {
         //添加id为mySpout,线程数为1的Spout
         builder.setSpout("mySpout",new MySpout(),1);
         builder.setBolt("firstBolt",new FirstBolt(),1).shuffleGrouping("mySpout");
-        builder.setBolt("secondBolt",new FirstBolt(),1).shuffleGrouping("firstBolt");
+        builder.setBolt("secondBolt",new SecondBolt(),1).shuffleGrouping("firstBolt");
 
         //生成拓扑
         StormTopology topology = builder.createTopology();

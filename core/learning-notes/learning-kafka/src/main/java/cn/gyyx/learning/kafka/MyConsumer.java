@@ -11,9 +11,9 @@ import java.util.concurrent.TimeUnit;
 
 public class MyConsumer{
 
-//    private static final String KAFKA_BROKERS = "storm-cluster1.gyyx.cn:9092,storm-cluster2.gyyx.cn:9092,storm-cluster3.gyyx.cn:9092,storm-cluster4.gyyx.cn:9092,storm-cluster5.gyyx.cn:9092";
+    private static final String KAFKA_BROKERS = "storm-cluster1.gyyx.cn:9092,storm-cluster2.gyyx.cn:9092,storm-cluster3.gyyx.cn:9092,storm-cluster4.gyyx.cn:9092,storm-cluster5.gyyx.cn:9092";
 
-    private static final String KAFKA_BROKERS = "pm0400:9092";
+    //private static final String KAFKA_BROKERS = "pm0400:9092";
 
     private final KafkaConsumer<String, String> consumer;
 
@@ -40,7 +40,7 @@ public class MyConsumer{
     public void doIt() throws InterruptedException {
         System.out.println("---------开始消费---------");
         while (true) {
-            msgList = consumer.poll(10);
+            msgList = consumer.poll(5);
             for (ConsumerRecord<String, String> record : msgList) {
                 System.out.println(String.format("Consumer receive a msg --- topic:%s,offset:%d,消息:%s", //
                         record.topic(), record.offset(), record.value()));
