@@ -20,6 +20,20 @@ public class Demo {
 
     public static void main(String[] args) throws InvalidTopologyException, AuthorizationException, AlreadyAliveException, InterruptedException {
 
+
+        /**
+         * 一、Storm 的几个基本概念： worker,executor,task,topology,parallelism,tuple,bolt,spout
+         *
+         *
+         * 二、group的类型：
+         * 1.Shuffle Grouping: 随机分组， 随机派发stream里面的tuple， 保证bolt中的每个任务接收到的tuple数目相同.(它能实现较好的负载均衡)
+         * 2.Fields Grouping：按字段分组， 比如按userid来分组， 具有同样userid的tuple会被分到同一任务， 而不同的userid则会被分配到不同的任务
+         * 3.All Grouping： 广播发送,对于每一个tuple,Bolts中的所有任务都会收到.
+         * 4.Global Grouping: 全局分组，这个tuple被分配到storm中的一个bolt的其中一个task.再具体一点就是分配给id值最低的那个task.
+         * 5.Non Grouping: 不分组，意思是说stream不关心到底谁会收到它的tuple.目前他和Shuffle grouping是一样的效果,有点不同的是storm会把这个bolt放到这个bolt的订阅者同一个线程去执行.
+         * 6.Direct Grouping: 直接分组,这是一种比较特别的分组方法，用这种分组意味着消息的发送者举鼎由消息接收者的哪个task处理这个消息.只有被声明为Direct Stream的消息流可以声明这种分组方法.而且这种消息tuple必须使用emitDirect方法来发射.消息处理者可以通过TopologyContext来或者处理它的消息的taskid (OutputCollector.emit方法也会返回taskid)
+         */
+
         TopologyBuilder builder = new TopologyBuilder();
         //添加id为mySpout,线程数为1的Spout
         builder.setSpout("mySpout",new MySpout(),1);
