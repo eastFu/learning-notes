@@ -21,6 +21,7 @@ public class MyConsumer{
 
     private final String topic;
 
+
     private static final String GROUP_ID = "testCanal";
 
     public MyConsumer(String topicName) {
