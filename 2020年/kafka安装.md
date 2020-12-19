@@ -4,7 +4,6 @@
 
 >kafka的安装需要依赖zookeeper，虽然kafka自带了zookeeper，但是为了方便维护，推荐自己安装zookeeper
 
-
 ```
 #zookeeper下载地址：
 https://zookeeper.apache.org/releases.html
