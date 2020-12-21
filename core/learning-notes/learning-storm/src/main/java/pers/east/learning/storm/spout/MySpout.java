@@ -45,6 +45,4 @@ public class MySpout extends BaseRichSpout {
         outputFieldsDeclarer.declare(new Fields("step1"));
     }
 
-
-
 }
