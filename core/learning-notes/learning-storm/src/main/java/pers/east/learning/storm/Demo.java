@@ -8,8 +8,10 @@ import org.apache.storm.generated.AuthorizationException;
 import org.apache.storm.generated.InvalidTopologyException;
 import org.apache.storm.generated.StormTopology;
 import org.apache.storm.topology.TopologyBuilder;
+import org.apache.storm.topology.base.BaseWindowedBolt;
 import pers.east.learning.storm.bolt.FirstBolt;
 import pers.east.learning.storm.bolt.SecondBolt;
+import pers.east.learning.storm.bolt.ThirdWindowBolt;
 import pers.east.learning.storm.spout.MySpout;
 
 import java.util.concurrent.TimeUnit;
@@ -39,6 +41,10 @@ public class Demo {
         builder.setSpout("mySpout",new MySpout(),1);
         builder.setBolt("firstBolt",new FirstBolt(),1).shuffleGrouping("mySpout");
         builder.setBolt("secondBolt",new SecondBolt(),1).shuffleGrouping("firstBolt");
+
+        builder.setBolt("thirdWindowBolt",
+                new ThirdWindowBolt().withWindow(new BaseWindowedBolt.Count(30),new BaseWindowedBolt.Count(10)),1)
+                .shuffleGrouping("firstBolt");
 
         //生成拓扑
         StormTopology topology = builder.createTopology();
