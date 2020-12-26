@@ -46,7 +46,6 @@ public class Demo {
                 new ThirdWindowBolt().withWindow(new BaseWindowedBolt.Count(30),new BaseWindowedBolt.Count(10)),1)
                 .shuffleGrouping("firstBolt");
 
-        
         //生成拓扑
         StormTopology topology = builder.createTopology();
 
