@@ -51,7 +51,7 @@ public class Demo {
                 new ThirdWindowBolt().withWindow(new BaseWindowedBolt.Count(30),new BaseWindowedBolt.Count(10)),1)
                 .shuffleGrouping("firstBolt");
 
-        
+
         //生成拓扑
         StormTopology topology = builder.createTopology();
 
@@ -59,6 +59,7 @@ public class Demo {
         // 不输出发送的消息及系统消息
         config.setDebug(false);
 
+        
         // 本地模式
         if(IS_LOCAL){
             LocalCluster cluster = new LocalCluster();
