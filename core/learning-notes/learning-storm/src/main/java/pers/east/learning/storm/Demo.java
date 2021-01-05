@@ -23,7 +23,6 @@ public class Demo {
     public static void main(String[] args) throws InvalidTopologyException, AuthorizationException, AlreadyAliveException, InterruptedException {
 
         /**
-         *
          * 一、Storm 的几个基本概念： worker,executor,task,topology,parallelism,tuple,bolt,spout
          *
          * 二、group的类型：
@@ -35,7 +34,6 @@ public class Demo {
          * 6.Direct Grouping: 直接分组,这是一种比较特别的分组方法，用这种分组意味着消息的发送者举鼎由消息接收者的哪个task处理这个消息.
          *      只有被声明为Direct Stream的消息流可以声明这种分组方法.而且这种消息tuple必须使用emitDirect方法来发射.消息处理者可以通过TopologyContext
          *      来或者处理它的消息的taskid (OutputCollector.emit方法也会返回taskid)
-         *
          */
 
         TopologyBuilder builder = new TopologyBuilder();
@@ -59,7 +57,7 @@ public class Demo {
         // 不输出发送的消息及系统消息
         config.setDebug(false);
 
-        
+
         // 本地模式
         if(IS_LOCAL){
             LocalCluster cluster = new LocalCluster();
