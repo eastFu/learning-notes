@@ -10,7 +10,6 @@ public class Test {
         MyConsumer myConsumer = new MyConsumer("nginx_topic");
         myConsumer.doIt();
 
-
        /* Properties p = new Properties();
         p.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "10.12.53.5:9092");
         p.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
