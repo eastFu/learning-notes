@@ -14,7 +14,7 @@ public class KafkaSpoutBuilder {
     // kafka消费者定义的groupId
     private static String groupId = "test";
 
-    
+
     public static KafkaSpout createKafkaSpout() {
 
         BrokerHosts host = new ZkHosts(KafkaSpoutBuilder.zkStr);
