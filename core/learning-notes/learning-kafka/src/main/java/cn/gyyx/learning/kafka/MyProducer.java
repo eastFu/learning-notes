@@ -25,6 +25,7 @@ public class MyProducer{
         this.topic = topicName;
     }
 
+    
     public void doIt() throws InterruptedException {
         //消息实体
         ProducerRecord<String , String> record = null;
