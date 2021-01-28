@@ -19,7 +19,6 @@ server.1=localhost:2287:3387
 server.2=localhost:2288:3388
 server.3=localhost:2289:3389
 
-
 echo 1 >> /data/zk/node1/data/myid
 echo 2 >> /data/zk/node2/data/myid
 echo 3 >> /data/zk/node3/data/myid
