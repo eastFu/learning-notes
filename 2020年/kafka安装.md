@@ -2,6 +2,7 @@
 
 ###1.下载安装
 
+
 >kafka的安装需要依赖zookeeper，虽然kafka自带了zookeeper，但是为了方便维护，推荐自己安装zookeeper
 
 ```
