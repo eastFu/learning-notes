@@ -8,6 +8,7 @@
 #zookeeper下载地址：
 https://zookeeper.apache.org/releases.html
 
+
 #解压缩zookeeper
 tar -zxvf apache-zookeeper-3.6.2-bin.tar.gz
 
