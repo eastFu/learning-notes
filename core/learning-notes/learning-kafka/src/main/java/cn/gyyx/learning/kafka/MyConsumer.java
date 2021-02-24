@@ -7,7 +7,6 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 
 import java.util.Collections;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 public class MyConsumer{
 
@@ -30,7 +29,7 @@ public class MyConsumer{
         props.put("enable.auto.commit", "true");
         props.put("auto.commit.interval.ms", "1000");
         props.put("session.timeout.ms", "30000");
-//        props.put("auto.offset.reset", "earliest");
+        props.put("auto.offset.reset", "earliest");
         props.put("key.deserializer", StringDeserializer.class.getName());
         props.put("value.deserializer", StringDeserializer.class.getName());
         this.consumer = new KafkaConsumer<String, String>(props);
@@ -46,7 +45,7 @@ public class MyConsumer{
             for (ConsumerRecord<String, String> record : msgList) {
                 System.out.println(String.format("Consumer receive a msg --- topic:%s,offset:%d,消息:%s", //
                         record.topic(), record.offset(), record.value()));
-                TimeUnit.SECONDS.sleep(2);
+//                TimeUnit.SECONDS.sleep(2);
             }
         }
         //consumer.close();
