@@ -5,6 +5,9 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.Properties;
 
@@ -20,7 +23,7 @@ public class MyConsumer{
 
     private final String topic;
 
-    private static final String GROUP_ID = "testCanal";
+    private static final String GROUP_ID = "test111";
 
     public MyConsumer(String topicName) {
         Properties props = new Properties();
@@ -29,7 +32,7 @@ public class MyConsumer{
         props.put("enable.auto.commit", "true");
         props.put("auto.commit.interval.ms", "1000");
         props.put("session.timeout.ms", "30000");
-//        props.put("auto.offset.reset", "earliest");
+        props.put("auto.offset.reset", "latest");
         props.put("key.deserializer", StringDeserializer.class.getName());
         props.put("value.deserializer", StringDeserializer.class.getName());
         this.consumer = new KafkaConsumer<String, String>(props);
@@ -43,11 +46,25 @@ public class MyConsumer{
         while (true) {
             msgList = consumer.poll(5);
             for (ConsumerRecord<String, String> record : msgList) {
-                System.out.println(String.format("Consumer receive a msg --- topic:%s,offset:%d,消息:%s", //
+//                record.headers().toString();
+                System.out.println(getNowTime()+"  "+ record.timestamp()+"    "+getBeforeDateTime(record.timestamp())+String.format("    Consumer receive a msg --- topic:%s,offset:%d,消息:%s", //
                         record.topic(), record.offset(), record.value()));
 //                TimeUnit.SECONDS.sleep(2);
             }
         }
         //consumer.close();
+    }
+
+    // 获取几分钟前的时间字符串
+    public static String getNowTime(){
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return df.format(LocalDateTime.now(ZoneOffset.ofHours(8)));
+    }
+
+    // 获取给定时间字符串的时间点的几分钟前
+    public static String getBeforeDateTime(long timeStr){
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime before = LocalDateTime.ofEpochSecond(timeStr/1000, 0, ZoneOffset.ofHours(8));
+        return df.format(before);
     }
 }

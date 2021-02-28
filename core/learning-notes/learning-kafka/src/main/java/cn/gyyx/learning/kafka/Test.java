@@ -8,7 +8,7 @@ public class Test {
         myProducer.doIt();*/
 
 //        MyConsumer myConsumer = new MyConsumer("elves_cmdb");
-        MyConsumer myConsumer = new MyConsumer("flow_data_new");
+        MyConsumer myConsumer = new MyConsumer("nginx_topic");
         myConsumer.doIt();
 
        /* Properties p = new Properties();
