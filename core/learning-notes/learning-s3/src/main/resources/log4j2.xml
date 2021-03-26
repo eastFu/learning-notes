@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration monitorInterval="5">
+    <Properties>
+        <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [ %-5level] %class{36}.%M-%L        : %msg%xEx%n" />
+        <property name="FILE_PATH" value="/opt/logs/cephSync.log" />
+    </Properties>
+
+    <appenders>
+        <console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+        </console>
+        <File name="Filelog" fileName="${FILE_PATH}" append="false">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </File>
+    </appenders>
+
+    <loggers>
+        <logger name="org.mybatis" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+        </logger>
+        <Logger name="org.springframework" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <root level="info">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="Filelog"/>
+        </root>
+    </loggers>
+</configuration>

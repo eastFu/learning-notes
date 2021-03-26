@@ -20,6 +20,10 @@
         <module>learning-kafka</module>
         <module>learning-canal</module>
         <module>learning-postgresql</module>
+        <module>flink</module>
+        <module>s3</module>
+        <module>learning-flink</module>
+        <module>learning-s3</module>
     </modules>
 
     <name>learning-notes</name>
