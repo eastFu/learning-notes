@@ -4,15 +4,11 @@ public class Test {
 
     public static void main(String[] args) throws InterruptedException {
 
-        /*MyProducer myProducer = new MyProducer("didi");
-        myProducer.doIt();*/
-
-//        MyConsumer myConsumer = new MyConsumer("elves_cmdb");
-        MyConsumer myConsumer = new MyConsumer("nginx_topic");
+        MyConsumer myConsumer = new MyConsumer("test");
         myConsumer.doIt();
 
        /* Properties p = new Properties();
-        p.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "10.12.53.5:9092");
+        p.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "storm.demo.cn:9092");
         p.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         p.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         p.put(ConsumerConfig.GROUP_ID_CONFIG, "didi");

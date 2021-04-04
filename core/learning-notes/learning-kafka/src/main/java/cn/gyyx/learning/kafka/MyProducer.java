@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class MyProducer{
 
-    private static final String KAFKA_BROKERS = "10.12.53.5:9092,10.12.53.6:9092,10.12.53.7:9092";
+    private static final String KAFKA_BROKERS = "storm.demo.cn:9092";
 
     protected KafkaProducer<String, String> producer;
 
